@@ -1,0 +1,58 @@
+.Tags__App{
+    overflow-y: hidden;
+    white-space: nowrap;
+    align-self: center;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    max-width: fit-content;
+    margin-left: 2%;
+}
+.Tag__Element__App{
+    display: flex;
+    cursor: pointer;
+    border-radius: 15px;
+    align-items: center;
+    justify-content: center;
+    width:fit-content;
+    height:fit-content;
+    margin-left: 10px;
+    padding: 10px;
+    background-color: white;
+}
+.Tag__Element__App p{
+    margin: 0px;
+    max-width: fit-content;
+    font-weight: bold;
+    
+    height: 25px;
+ 
+    text-align: center;
+}
+.Detail__House{
+    display: flex;
+    flex-direction: row;
+ 
+    width: 230px;
+    justify-content: space-between;
+    height: 40px;
+    margin-top: 18px;
+}
+.Detail__Element__House {
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+ 
+    
+}
+.Detail__Element__House p{
+    margin: 0;
+ 
+    font-size: 13px;
+}
+.Detail__Element__House img{
+    height:20px;
+    width: 20px;
+}

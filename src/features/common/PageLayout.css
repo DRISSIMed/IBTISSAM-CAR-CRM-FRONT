@@ -1,0 +1,80 @@
+body{
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+.Container__Common{
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    width: 100%;
+    height: 8%;
+    margin-top: 3px;
+    position: fixed;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    border-bottom: 3px solid #dfd7ca;
+}
+.Header__Common{
+    display: flex;
+    justify-content: center;
+    align-items:center ;
+    width: 50%;
+}
+.Nav__Barre{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+}
+.Container__Header__Options{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 20px;
+    align-items: center;
+     color: gray;
+    width: fit-content;
+}
+.Container__Header__Options >p{
+    font-size: 16px;
+    margin: 0;
+    padding-bottom: 5px;
+}
+.Container__Header__Options:hover{
+    color: black;
+}
+
+.Nav__Barre__Element{
+    background-color: green;
+    display: flex;
+}
+.Title__Header{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items:center ;
+    width: 25%;
+}
+.Own__Info__Header{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    padding-right: 10px;
+     align-items: center;
+    width: 25%;
+}
+.Own__Info__Header p{
+    margin: 0;
+}
+.Info__Owner__Common{
+    padding: 10px;
+}
+
+.Footer{
+    text-align: center;
+    background-color: white;
+    font-size: 13px;
+    width: 100%;
+    position:absolute;
+    margin-bottom: 0%;
+}
