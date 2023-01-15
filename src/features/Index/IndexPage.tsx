@@ -1,4 +1,5 @@
 import React,{useEffect,useState,CSSProperties} from 'react'
+import { UrlApi } from '../common/Util'
 import './IndexPage.css'
 import noLike from '../../Imgaes/noLike.png'
 import user from '../../Imgaes/user.png'
@@ -6,21 +7,8 @@ import fuel from '../../Imgaes/fuel.png'
 import location from '../../Imgaes/location.png'
 import speed from '../../Imgaes/speed.png'
 import like from '../../Imgaes/like.png'
-import unlike from '../../Imgaes/noLike.png'
 import arrow  from '../../Imgaes/arrow.png'
-import audi from '../../Imgaes/audi.png'
 import mercedesIcon from '../../Imgaes/mercedes.png'
-import volswagnIcon from '../../Imgaes/volswagn.png'
-import renaultIcon from '../../Imgaes/renault.png'
-import audiIcon from '../../Imgaes/audi-logo.png'
-import landIcon from'../../Imgaes/land.png'
-import hyundiaIcon from  '../../Imgaes/hyundai.png'
-import jeepIcon from  '../../Imgaes/jeep.png'
-import bmwIcon from '../../Imgaes/bmw.png'
-import { AiOutlineUser} from "react-icons/ai";
-import { AiOutlineUnlock} from "react-icons/ai";
-import { AiFillFacebook} from "react-icons/ai";
-import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import Login from '../Login/Login';
 import PageLayout from '../common/PageLayout'
@@ -48,7 +36,7 @@ export default function Index() {
 
   }
   useEffect(()=>{
-    fetch('http://localhost:8090/IbtissamCar/range-car/v2/list', {
+    fetch(UrlApi+'range-car/v2/list', {
         })
         .then(response => response.json())
         .then(json => {
@@ -60,7 +48,7 @@ export default function Index() {
           console.error(error)
         })
 
-        fetch('http://localhost:8090/IbtissamCar/type-car/v2/list', {
+        fetch(UrlApi+'type-car/v2/list', {
         })
         .then(response => response.json())
         .then(json => {

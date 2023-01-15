@@ -1,4 +1,4 @@
-import React  , { useState,useEffect } from 'react'
+import React  , { useState,useEffect, HtmlHTMLAttributes } from 'react'
 import audi from '../../Imgaes/audi.png'
 import house from '../../Imgaes/house.png'
 import fuel from '../../Imgaes/fuel.png'
@@ -11,41 +11,102 @@ import emailIcon from '../../Imgaes/mail.png'
 import phoneIcon from '../../Imgaes/telephone.png'
 import identityIcon from '../../Imgaes/card.png'
 import drivingIcon from '../../Imgaes/driving.png'
-import contratIcon from '../../Imgaes/contract.png'
+import countryIcon from '../../Imgaes/country.png'
 import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import { useParams } from "react-router-dom";
 import './DetailsCar.css'
 import PageLayout from '../common/PageLayout'
 import Rate from '../common/Rate'
-
-
+import { UrlApi } from '../common/Util'
+import Select from 'react-select';
+import {toast } from 'react-toastify';
 
 export default function DetailsCar() {
     const [email,setEmail]=useState('');
     const [password,setPassord]=useState('')
     const [dataList,setDataList]=useState(Object)
-
+    const [itemId,setItemId]=useState();
+    const [isHaveChildren,setIsHaveChildren]=useState<Boolean>(false)
+    const [initialCheckedValue,setInitialCheckedValue]=useState<boolean>(true)
+    console.log("ITEM ID INSIDE DETAIL ==>",itemId)
     let {id}=useParams();
     const formik = useFormik({
         initialValues: {
-          firstName: '',
-          lastName: '',
+          nameComplet:'',
           email: '',
+          phoneNumber:'',
+          age:0,
+          nbrOfChildrens:0,
+          identityCard:'',
+          driveLicense:'',
+          nbrOfPersons:0,
+          country:'',
+          hasChildren:false
         },
         onSubmit: values => {
-          alert(JSON.stringify(values, null, 2));
+
+        //alert(JSON.stringify(values, null, 2))
+
+          fetch(UrlApi+'reservation/create/v2/'+id, {headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },method:'POST',body:JSON.stringify(values)})
+          .then(response =>   
+            response.json())
+          .then((response :any)=> {
+            if(response){
+              toast.success("Reservation added sucsesfully !",{className: 'toast-message'});
+              formik.resetForm()
+            }
+         
+          })
+          .catch(function (error) {
+            console.error(error)
+          })
+          
+
+          
         },
+        validationSchema: Yup.object({
+            nameComplet: Yup.string()
+                    .required(),
+            email: Yup.string()
+                    .email()
+                    .required(),
+            age: Yup.number()
+                  .min(18,"You need to be more than 18")
+                  .required(),
+           phoneNumber: Yup.string()
+                    .label('Phone number')
+                    
+                  .required(),
+            nbrOfPersons:Yup.number()
+                     .min(1,"More than one person ")
+                     .required(),
+          identityCard: Yup.string()
+                        .label('Identity')
+                     .required(), 
+             driveLicense: Yup.string()
+                     .label('License')
+             .required(),  
+             country:  Yup.string()
+             .label('Country')
+          .required()        
+
+          })
       });
   
    
       useEffect(()=>{
-        fetch('http://localhost:8090/IbtissamCar/range-car/get/'+id, {
+        fetch(UrlApi+'range-car/get/'+id, {
             })
             .then(response => response.json())
             .then(response => {
                 console.log('RESPONSE ',response)   
                         let data=response
                  setDataList(data)
+                 setItemId(data.id)
                 // setTimeout(()=>console.log("inisde state", setDataList(json)  ),1000)
                 setTimeout(()=>console.log("inisde state", dataList  ),1000)
                 setTimeout(()=>console.log("lentgh", dataList.id  ),1000)
@@ -54,9 +115,65 @@ export default function DetailsCar() {
               console.error(error)
             })
         }
-      ,[dataList])
+      ,[])
 
+    const onlyOne=(checkbox:string)=> {
+        const checkboxes = document.getElementsByName('check')
+        const check = document.getElementById(checkbox) as HTMLInputElement
+        Array.prototype.forEach.call(checkboxes,function(el){
+            el.checked = false;
+        });
+        check.checked = true;
+        console.log("Value checked",check.value=="true")
+        if(check.value=="true"){
+           setIsHaveChildren(true)
+           formik.values.hasChildren=true
+           setInitialCheckedValue(false)
+           setTimeout(()=>console.log("HAVE CHILDREN STATE ",isHaveChildren))
+        }
+        else if(check.value=="false"){
+            setIsHaveChildren(false)
+            formik.values.hasChildren=false
+            setInitialCheckedValue(true)
+            setTimeout(()=>console.log("HAVE CHILDREN STATE ",isHaveChildren))
+        }
+     
+        }
+    const InputAgeChildren=[]   
+    for(let i=0;i<formik.values.nbrOfChildrens;i++){
+        let subData=<div className="Input__View_Detail">
+        <div className="Input__Icon__Detail">
+            <img src={ageIcon} alt="" />
+        </div>
+        <div className="Input__Pad">
+             <input
+             id="nbrOfPerson"
+             name="ageChildren"
+             type="number"
+             min={1}
+             max={18}
+             placeholder={'child '+(i+1)+' age'}
+            
+         />
+        </div>
 
+  </div>
+   InputAgeChildren.push(subData)
+
+    }
+
+    const options = [
+        { value: 'chocolate', label: 'Chocolate' },
+        { value: 'strawberry', label: 'Strawberry' },
+        { value: 'vanilla', label: 'Vanilla' },
+      ];
+      const [selectedOption, setSelectedOption] = useState(null);
+
+      const handleSelectInput =(e:any)=>{
+        console.log(e)
+        setSelectedOption(e)
+        formik.values.country=e.label
+      }
 
   return (
          <PageLayout>   
@@ -223,12 +340,15 @@ export default function DetailsCar() {
                                    </div>
                                    <div className="Input__Pad">
                                         <input
-                                        id="firstName"
-                                        name="firstName"
+                                        id="nameComplet"   
+                                        placeholder='Name'
                                         type="text"
                                         onChange={formik.handleChange}
-                                        value={formik.values.firstName}
+                                        value={formik.values.nameComplet}
                                     />
+                                     {formik.touched.nameComplet && formik.errors.nameComplet && (
+                                            <span className='text-red-400'>{formik.errors.nameComplet}</span>
+                                          )}
                                    </div>
 
                              </div>
@@ -242,13 +362,48 @@ export default function DetailsCar() {
                                    </div>
                                    <div className="Input__Pad">
                                         <input
-                                        id="firstName"
-                                        name="firstName"
+                                        id="email"
+                                        placeholder='Email'
                                         type="text"
                                         onChange={formik.handleChange}
-                                        value={formik.values.firstName}
+                                        value={formik.values.email}
+                                     
+                                    />
+                                       {formik.touched.email && formik.errors.email && (
+                                            <span className='text-red-400'>{formik.errors.email}</span>
+                                          )}
+                                   </div>
+
+                             </div>
+
+              
+
+                             <div className="Input__View_Detail">
+                                   <div className="Input__Icon__Detail">
+                                       <img src={countryIcon} alt="" />
+
+                                   </div>
+                                   <div className="Input__Pad">
+                                   <Select
+                                        value={selectedOption}
+                                        onChange={(e)=>handleSelectInput(e)}
+                                        styles={{
+                                            control: (baseStyles, state) => ({
+                                              ...baseStyles,
+                                              borderColor: state.isFocused ? 'white' : 'white',
+                                              border:'none',
+                                              outline:'none'
+
+                                            }),
+                                          }}
+                                        isSearchable={true}
+                                        options={options}
+                                        placeholder="Country"
                                     />
                                    </div>
+                                   {formik.touched.country && formik.errors.country && (
+                                            <span className='text-red-400'>{formik.errors.country}</span>
+                                          )}
 
                              </div>
 
@@ -259,12 +414,15 @@ export default function DetailsCar() {
                                    </div>
                                    <div className="Input__Pad">
                                         <input
-                                        id="firstName"
-                                        name="firstName"
+                                        id="phoneNumber"
+                                        placeholder='Phone Number'
                                         type="text"
                                         onChange={formik.handleChange}
-                                        value={formik.values.firstName}
+                                        value={formik.values.phoneNumber}
                                     />
+                                        {formik.touched.phoneNumber && formik.errors.phoneNumber && (
+                                            <span className='text-red-400'>{formik.errors.phoneNumber}</span>
+                                          )}
                                    </div>
 
                              </div>
@@ -276,12 +434,15 @@ export default function DetailsCar() {
                                    </div>
                                    <div className="Input__Pad">
                                         <input
-                                        id="firstName"
-                                        name="firstName"
-                                        type="text"
+                                        id="age"
+                                        placeholder='Age'
+                                        type="number"
                                         onChange={formik.handleChange}
-                                        value={formik.values.firstName}
+                                        value={formik.values.age}
                                     />
+                                     {formik.touched.age && formik.errors.age && (
+                                            <span className='text-red-400'>{formik.errors.age}</span>
+                                          )}
                                    </div>
 
                              </div>
@@ -293,12 +454,17 @@ export default function DetailsCar() {
                                    </div>
                                    <div className="Input__Pad">
                                         <input
-                                        id="firstName"
-                                        name="firstName"
-                                        type="text"
+                                        id="nbrOfPersons"
+                                        type="number"
+                                        placeholder='Number of person'
                                         onChange={formik.handleChange}
-                                        value={formik.values.firstName}
+                                        value={formik.values.nbrOfPersons}
+
                                     />
+                                     {formik.touched.nbrOfPersons && formik.errors.nbrOfPersons && (
+                                            <span className='text-red-400'>{formik.errors.nbrOfPersons}</span>
+                                          )}
+                                   
                                    </div>
 
                              </div>
@@ -309,16 +475,23 @@ export default function DetailsCar() {
 
                                    </div>
                                    <div className="Input__Pad">
-                                        <input
-                                        id="firstName"
-                                        name="firstName"
+                                        <input 
+                                        id="identityCard"
                                         type="text"
                                         onChange={formik.handleChange}
-                                        value={formik.values.firstName}
+                                         placeholder="Identity"
+                                        value={formik.values.identityCard}
                                     />
+
+                                        {formik.touched.identityCard && formik.errors.identityCard && (
+                                            <span className='text-red-400'>{formik.errors.identityCard}</span>
+                                          )}
+                                    
                                    </div>
 
                              </div>
+
+                           
 
 
                              <div className="Input__View_Detail">
@@ -328,39 +501,84 @@ export default function DetailsCar() {
                                    </div>
                                    <div className="Input__Pad">
                                         <input
-                                        id="firstName"
-                                        name="firstName"
+                                        id="driveLicense"
                                         type="text"
+                                        placeholder='Drive license'
                                         onChange={formik.handleChange}
-                                        value={formik.values.firstName}
+                                        value={formik.values.driveLicense}
                                     />
                                    </div>
+                                   {formik.touched.driveLicense && formik.errors.driveLicense && (
+                                            <span className='text-red-400'>{formik.errors.driveLicense}</span>
+                                          )}
 
                              </div>
+                             
+                             <div className='Question__Container'>
+                                      <p>Do you have childrens ?</p>
+                                      <div className='Option__Answer'>
+                                                <input
+                                                    id="yes"
+                                                    type="checkbox"
+                                                    name="check"
+                                                    value="true"
+                                                   onClick={()=>onlyOne("yes")}
+                                                />
+                                                  <label>
+                                                    Yes
+                                                </label>
+                                      </div>
 
-                             <div className="Input__View_Detail">
-                                   <div className="Input__Icon__Detail">
-                                       <img src={identityIcon} alt="" />
-
-                                   </div>
-                                   <div className="Input__Pad">
-                                        <input
-                                        id="firstName"
-                                        name="firstName"
-                                        type="text"
-                                        onChange={formik.handleChange}
-                                        value={formik.values.firstName}
-                                    />
-                                   </div>
+                                      <div className='Option__Answer'>
+                                                <input
+                                                    id="no"
+                                                    type="checkbox" 
+                                                    name="check"
+                                                    value="false"
+                                                    checked={initialCheckedValue}
+                                                    onClick={()=>onlyOne("no")}
+                                                />
+                                                <label>
+                                                    No
+                                                </label>
+                                      </div> 
 
                              </div>
+                              {isHaveChildren?<>
+                                 <div className="Input__View_Detail">
+                                 <div className="Input__Icon__Detail">
+                                     <img src={user} alt="" />
+
+                                 </div>
+                                 <div className="Input__Pad">
+                                      <input
+                                      id="nbrOfPerson"
+                                      name="nbrOfChildrens"
+                                      type="number"
+                                      value={formik.values.nbrOfChildrens}
+                                      placeholder='Number of childrens'
+                                      onChange={formik.handleChange}
+                                     
+                                  />
+                                 </div>
+
+                           </div>
+                            
+                            { (InputAgeChildren && InputAgeChildren.length>0)?InputAgeChildren.map(e=>e):''}
+                           </>
+                              
+                              
+                              :''}
+
+
+                          
                         
-                            <button type="submit">Submit</button>
+                            <button type="submit" onClick={()=>formik.handleSubmit}>Submit</button>
                             </form>
 
                </div>
 
-               <Rate/>
+               <Rate itemId={itemId}/>
 
          </div>
          </PageLayout>
