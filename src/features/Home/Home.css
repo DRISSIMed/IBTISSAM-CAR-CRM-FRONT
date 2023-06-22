@@ -4,20 +4,27 @@ body{
     margin: 0;
  
 }
-.Form{
-    height: 100%;
-    width: 100%;
-}
-.Form input[type="text"],.Form  input[type="date"],.Form input[type="number"]{
+.Form input[type="text"],.Form  input[type="date"]{
     height: 30px;
     padding-left: 10px;
     border-radius: 5px;
     margin-top: 10px;
     border: none;
-    width: 300px;
+    width: 150px;
     outline:none;
     border-color: gray;
   }
+ .Form input[type="number"]{
+    height: 30px;
+    padding-left: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    border: none;
+    width: 80px;
+    outline:none;
+    border-color: gray;
+
+ } 
 
 ul {
     display: flex;
@@ -81,8 +88,8 @@ form{
     flex-wrap: wrap;
     background-color: white;
     box-shadow: 1px 1px 2px 2px #dfd7ca;
-    margin-left: 30px;
-    margin-right: 30px;
+    margin-left: 80px;
+    margin-right: 80px;
     margin-bottom: 15px; 
     padding-bottom: 10px;
 }
@@ -90,7 +97,7 @@ label{
     font-weight: 400;
 }
 .Form__Element{
-    margin-left: 50px;
+    margin-left: 100px;
     height: 50px;
     margin-top: 10px;
     display: flex;
@@ -102,13 +109,7 @@ label{
     height: 40px;
 
 }
-.Form__Element input[type='text']{
-    width:500px
 
-}
-.Form__Element input[type='date']{
-    width:200px
-}
 .Form__Element button{
     width: 400px;
     margin-top: 10px;
@@ -174,4 +175,28 @@ label{
     height: 15vmax;
     
  
+}
+.CheeckBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 40px;
+}
+.CheeckBox input{
+    width: 30px;
+    height:30px ;
+    margin: 15px;
+    align-items: center;
+}
+.CheeckBox label{
+    margin-left: 3px;
+    font-weight: 500;
+}
+.Body__Element__Container__Search{
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: fit-content;
 }

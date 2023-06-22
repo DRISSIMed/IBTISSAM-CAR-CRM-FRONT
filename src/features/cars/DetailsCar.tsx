@@ -42,24 +42,29 @@ export default function DetailsCar() {
           driveLicense:'',
           nbrOfPersons:0,
           country:'',
-          hasChildren:false
+          hasChildren:false,
+          rangeCar:{id:id}
         },
         onSubmit: values => {
 
         //alert(JSON.stringify(values, null, 2))
 
-          fetch(UrlApi+'reservation/create/v2/'+id, {headers: {
+          fetch(UrlApi+'reservation/create/v2', {headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           },method:'POST',body:JSON.stringify(values)})
-          .then(response =>   
-            response.json())
-          .then((response :any)=> {
-            if(response){
+          .then(response  => {
+            if(response.status===200){
               toast.success("Reservation added sucsesfully !",{className: 'toast-message'});
               formik.resetForm()
             }
-         
+            else if(response.status===404){
+                toast.error("Oooops Probleme  !",{className: 'toast-message'});
+                }
+          
+           else if(response.status==406){
+            toast.error("This car already reserved  !",{className: 'toast-message'});
+           }
           })
           .catch(function (error) {
             console.error(error)
@@ -578,7 +583,7 @@ export default function DetailsCar() {
 
                </div>
 
-               <Rate itemId={itemId}/>
+               <Rate itemId={itemId} subject="car"/>
 
          </div>
          </PageLayout>

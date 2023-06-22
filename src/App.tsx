@@ -25,7 +25,7 @@ function App() {
       <Route path='/appartement' element={<Appartement/>}/>
       <Route path='/tour' element={<Tour/>}/>
       <Route path='/details-car/:id' element={<DetailsCar/>}/>
-      <Route path='/detail-appartement' element={<DetailsAppartement/>}/>
+      <Route path='/detail-appartement/:id' element={<DetailsAppartement/>}/>
     </Routes>
     </BrowserRouter>
    

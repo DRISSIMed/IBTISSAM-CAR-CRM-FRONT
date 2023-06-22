@@ -8,17 +8,19 @@ import noComment from '../../Imgaes/noComment.png'
 import { BsCursorFill } from "react-icons/bs";
 import {toast } from 'react-toastify';
 import './Rate.css'
+import Appartement from '../Appartement/Appartement';
 
-export default function Rate(itemId:any) {
+export default function Rate( subject:any) {  
   const [comment,setComment]=useState('')
   const [commentData,setCommentData]=useState<any>([])
   const handleCommentSubmit =(e: React.FormEvent<HTMLInputElement>)=>{
     setComment(e.currentTarget.value)
   }
-  console.log("ITEM ID IN RETE ",itemId.itemId)
+  console.log("ITEM ID IN RETE ",subject.itemId)
+   console.log("OBJECT IN RATE ",subject.subject)
   useEffect(()=>{
     
-    fetch(UrlApi+'comment/get/car/'+itemId.itemId, {
+    fetch(UrlApi+'comment/get/comment/'+subject.itemId+'?object='+subject.subject, {
     })
     .then(response => response.json())
     .then(response => {
@@ -28,14 +30,19 @@ export default function Rate(itemId:any) {
     .catch(function (error) {
       console.error(error)
     })
-  },[itemId.itemId])
+  },[subject.itemId])
 
   const addComment=()=>{
-    const Object={
-      comment:comment,
-      datePublsih:new Date(),
-      rangeCar:{id:itemId.itemId}
-    }
+      const Object={
+        comment:comment,
+        datePublsih:new Date(),
+        rangeCar:subject.subject==="car"?{id:subject.itemId}:null,
+        appartement:subject.subject==="appartement"?{id:subject.itemId}:null
+      }
+ 
+  
+
+   
     fetch(UrlApi+'comment/create', {headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'

@@ -1,24 +1,70 @@
-import React, { useEffect } from 'react'
+import React, { useEffect ,useState} from 'react'
 import './Home.css'
-// import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
-import { Select,DatePicker } from 'antd';
-
-import pic from '../../Imgaes/profile.png'
+import { useNavigate } from "react-router-dom";
+import Select from 'react-select';
 import audi from '../../Imgaes/audi.png'
 import house from '../../Imgaes/house.png'
 import tourIcon from '../../Imgaes/tour.png'
-import { Link } from 'react-router-dom';
+import like from '../../Imgaes/like.png'
+import arrow  from '../../Imgaes/arrow.png'
+import noLike from '../../Imgaes/noLike.png'
+import user from '../../Imgaes/user.png'
+import fuel from '../../Imgaes/fuel.png'
+import location from '../../Imgaes/location.png'
+import speed from '../../Imgaes/speed.png'
 import { Formik } from 'formik';
 import PageLayout from '../common/PageLayout'
-const { Option } = Select;
+import {toast } from 'react-toastify';
+import { UrlApi } from '../common/Util'
 export default function Home() {
-  const city=[{label:'test'}]
-  const handleSubmit =()=>{
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [dataList,setDataList]=useState([]);
+  const navigate = useNavigate();
+  const options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' },
+  ];
 
-  }
   useEffect(()=>{
 
   })
+  const handleSelectInput =(e:any)=>{
+    console.log(e)
+    setSelectedOption(e)
+  }
+  const handleSearch=()=>{
+    const check = document.getElementById("car") as HTMLInputElement
+    console.log("TYPE OF  ",typeof(check.value))
+      console.log("Val  ",check.value)
+    fetch(UrlApi+'search/get/avialable?type='+check.value, {
+      
+    })
+    .then(response => response.json())
+    .then(response => {
+        console.log('RESPONSE ',response)  
+        setDataList(response) 
+    })
+    .catch(function (error) {
+      console.error(error)
+    })
+
+  }
+
+  const handleLike =(id:string)=>{
+   
+    const element= document.getElementById(id) as HTMLInputElement
+    console.log("ELEMENT",element)
+     if(element.src==='http://localhost:3000'+noLike ){
+       toast.success("Thank you !",{className: 'toast-message'});
+       element.src=like
+      }else{
+       element.src=noLike
+      }
+   
+   console.log('Liked')
+  }
+
 
   return (
     <PageLayout>
@@ -57,12 +103,43 @@ export default function Home() {
                     }) => (
                       <form onSubmit={handleSubmit} >
                         <div className='Form__Element'>
-                        {/* <Select defaultValue="lucy" style={{ width: 320 ,borderColor:'white'}} >
-                          <Option value="jack">Jack</Option>
-                          <Option value="lucy">Lucy</Option>
-                          <Option value="Yiminghe">yiminghe</Option>
-                        </Select> */}
-                        <input type="text" placeholder='Aireport,City ...' />
+                        <Select
+                                        value={selectedOption}
+                                        onChange={(e)=>handleSelectInput(e)}
+                                        styles={{
+                                            control: (baseStyles, state) => ({
+                                              ...baseStyles,
+                                              borderColor: state.isFocused ? 'white' : 'white',
+                                              border:'none',
+                                              width:'400px',
+                                              outline:'none'
+
+                                            }),
+                                          }}
+                                        isSearchable={true}
+                                        options={options}
+                                        placeholder="Country"
+                                    />
+                        </div>
+
+                        <div className='Form__Element'>
+                        <Select
+                                        value={selectedOption}
+                                        onChange={(e)=>handleSelectInput(e)}
+                                        styles={{
+                                            control: (baseStyles, state) => ({
+                                              ...baseStyles,
+                                              borderColor: state.isFocused ? 'white' : 'white',
+                                              border:'none',
+                                              width:'400px',
+                                              outline:'none'
+
+                                            }),
+                                          }}
+                                        isSearchable={true}
+                                        options={options}
+                                        placeholder="Country"
+                                    />
                         </div>
 
                         <div className='Form__Element'>
@@ -91,17 +168,56 @@ export default function Home() {
                         </div>
                         <div className='Form__Element'>
 
-                        
-                        <input
-                        type='text'
-                        placeholder='Coupon'
-                        />
+                        <div className='CheeckBox'>
+                                                <input
+                                                    id="car"
+                                                    type="checkbox"
+                                                    name="check"
+                                                    value="car"
+                                              
+                                                />
+                                                  <label>
+                                                    Car
+                                                </label>
+                                      </div>
                         </div>
+
+                        <div className='Form__Element'>
+
+                          <div className='CheeckBox'>
+                                                  <input
+                                                      id="yes"
+                                                      type="checkbox"
+                                                      name="check"
+                                                      value="true"
+                                                
+                                                  />
+                                                    <label>
+                                                      Appartement
+                                                  </label>
+                                        </div>
+                          </div>
+
+                          <div className='Form__Element'>
+
+                          <div className='CheeckBox'>
+                                                  <input
+                                                      id="yes"
+                                                      type="checkbox"
+                                                      name="check"
+                                                      value="true"
+                                                
+                                                  />
+                                                    <label>
+                                                     Tours
+                                                  </label>
+                                        </div>
+                          </div>
 
                       
                     
                         <div className='Form__Element'>
-                        <button type="submit" disabled={isSubmitting}>
+                        <button type="submit" onClick={handleSearch}>
                           Search Now
                         </button>
                         </div>
@@ -111,60 +227,123 @@ export default function Home() {
 
           </div>
 
-          <div className="Services__Container">
-            <h3>Our services </h3>
-            <div className="Services">
 
-                <div className="Service__Element">
-                <div className="Service__Element__Image">
+          <div className="Body__Element__Container__Search">
+       
+              {
+                
+                    dataList && dataList.length>0 ?
+                 
+                    dataList.map(function(e:{
+                      id:any 
+                      libelle:any
+                      price:any
+                      picture:any
+                      code:any
+                
+                    }):any{
+                      return (
+                          <div className="Body__Element" key={e.id}>
+                          <div className="Image">
+                              <img src={'./Cars/'+e.picture+'.png'} />
+                          </div>
+                          <div className="Description">
+                              <div className="Info__Car__Index">
+                                  <p style={{color:'green',fontWeight:'bold',fontSize:'12px'}}>${e.price}</p>
+                                  <p style={{fontWeight:'bold'}}>
+                                    {e.libelle}
+                                  </p>
+                              </div>
+                              <div className="Action">
+                                  <div className='Action__Elment'>
+                                      <img src={noLike} id={e.libelle} onClick={()=>handleLike(e.libelle)} />
+                                  </div>
+                                  <div className='Action__Elment'>
+                                      <img src={arrow} alt="" onClick={()=> navigate('/details-car/'+e.id)} />
+                                  </div>
+                              </div>
+                          </div>
+                          <div className="Detail__Car">
+                              <div className="Detail__Element">
+                                  <img src={location} />  
+                                  <p>Marrakech</p>
+                              </div>
 
-                          <img src={house} />
-                </div>
-                    
-                    <div className="Service__Element__Container">
-                    <h3>Rent Appartement</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In reiciendis quia consectetur nisi aliquam illo voluptate possimus maiores, qui repellat odit aperiam fuga repudiandae, modi, esse nam ducimus? Ullam, quam!</p>
-                </div>
-                <div className="Serivce_Element__Button">
-                    <button>Take your app</button>
-                </div>
-                </div>
+                              <div className="Detail__Element">
+                                  <img src={speed} />
+                                  <p>239 km</p>
+                              </div>
 
-                <div className="Service__Element">
-                  <div className="Service__Element__Image">
-                        <img src={audi} />
-                  </div>
-                      
-                      <div className="Service__Element__Container">
-                        <h3>Rent Car</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In reiciendis quia consectetur nisi aliquam illo voluptate possimus maiores, qui repellat odit aperiam fuga repudiandae, modi, esse nam ducimus? Ullam, quam!</p>
-                        
+                              <div className="Detail__Element">
+                                  <img src={fuel} />
+                                  <p>Hybrid</p>
+                              </div>
+
+                              <div className="Detail__Element">
+                                  <img src={user} />
+                                  <p>4</p>
+                              </div>
+
+                          </div>
                       </div>
-                      <div className="Serivce_Element__Button">
-                            <button>Take your car</button>
-                    </div>
-                </div>
+                      )
+                    })
+                 
+                    :
+                    <div className="Services__Container">
+                      <h3>Our services </h3>
+                      <div className="Services">
 
-                <div className="Service__Element">
-                  <div className="Service__Element__Image">
-                        <img src={tourIcon} />
-                  </div>
-                      
-                      <div className="Service__Element__Container">
-                        <h3>Tour</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In reiciendis quia consectetur nisi aliquam illo voluptate possimus maiores, qui repellat odit aperiam fuga repudiandae, modi, esse nam ducimus? Ullam, quam!</p>
-                        
+                          <div className="Service__Element">
+                          <div className="Service__Element__Image">
+
+                                    <img src={house} />
+                          </div>
+                              
+                              <div className="Service__Element__Container">
+                              <h3>Rent Appartement</h3>
+                              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In reiciendis quia consectetur nisi aliquam illo voluptate possimus maiores, qui repellat odit aperiam fuga repudiandae, modi, esse nam ducimus? Ullam, quam!</p>
+                          </div>
+                          <div className="Serivce_Element__Button">
+                              <button>Take your app</button>
+                          </div>
+                          </div>
+
+                          <div className="Service__Element">
+                            <div className="Service__Element__Image">
+                                  <img src={audi} />
+                            </div>
+                                
+                                <div className="Service__Element__Container">
+                                  <h3>Rent Car</h3>
+                                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In reiciendis quia consectetur nisi aliquam illo voluptate possimus maiores, qui repellat odit aperiam fuga repudiandae, modi, esse nam ducimus? Ullam, quam!</p>
+                                  
+                                </div>
+                                <div className="Serivce_Element__Button">
+                                      <button>Take your car</button>
+                              </div>
+                          </div>
+
+                          <div className="Service__Element">
+                            <div className="Service__Element__Image">
+                                  <img src={tourIcon} />
+                            </div>
+                                
+                                <div className="Service__Element__Container">
+                                  <h3>Tour</h3>
+                                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In reiciendis quia consectetur nisi aliquam illo voluptate possimus maiores, qui repellat odit aperiam fuga repudiandae, modi, esse nam ducimus? Ullam, quam!</p>
+                                  
+                                </div>
+                                <div className="Serivce_Element__Button">
+                                      <button>Take your Tour</button>
+                              </div>
+                          </div>
                       </div>
-                      <div className="Serivce_Element__Button">
-                            <button>Take your Tour</button>
+
                     </div>
-                </div>
-            </div>
+              }
 
-          </div>
-
-
-
+        </div>
           </div>
           </div>
 

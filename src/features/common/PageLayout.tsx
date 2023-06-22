@@ -69,9 +69,9 @@ export default function PageLayout({children, }: { children: React.ReactNode | R
 
  
     </div>
-    <>
-            {children}
-    </>
+    <div className='Children_div'>
+            {children}edjjjmklmzekmf
+    </div>
 
     <footer>
           <div className="Footer">IbtissamCar 2022 copyright © All rights reserved</div>

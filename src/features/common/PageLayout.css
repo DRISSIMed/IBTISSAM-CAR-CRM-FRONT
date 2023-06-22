@@ -69,6 +69,11 @@ body{
 .Info__Owner__Common{
     padding: 10px;
 }
+.Children_div{
+    height: 100%;
+    width: 100%;
+
+}
 
 .Footer{
     text-align: center;
