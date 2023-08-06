@@ -1,0 +1,29 @@
+.ContainerStatics{
+    display: flex;
+    flex-direction: row;
+    
+    justify-content: center;
+}
+.subStatisticElement{
+    height:120px;
+    min-height: 60px;
+    width: 260px;
+    min-width: 130px;
+   
+    margin: 30px 30px;
+    background-color: white;
+    box-shadow: 1px 1px 2px 2px #dfd7ca;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.subStatisticElement .value{
+        font-weight: bold;
+        font-size: xx-large;
+}
+.subStatisticElement .label{
+    color: gray;
+    font-size: small;
+    margin-top: 6px;
+}
