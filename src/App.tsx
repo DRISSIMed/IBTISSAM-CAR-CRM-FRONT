@@ -12,15 +12,20 @@ import Appartement from './features/Appartement/Appartement';
 import DetailsAppartement from './features/Appartement/DetailsAppartement';
 import Tour from './features/tour/Tour';
 
+import 'primereact/resources/themes/lara-light-indigo/theme.css'; 
+import 'primereact/resources/primereact.css';                       
+import 'primeicons/primeicons.css';                                 
+import 'primeflex/primeflex.css';
+
 
 function App() {
 
   return (
     <BrowserRouter>
     <Routes>
-      <Route path='/' element={<IndexPage/>} />
+      <Route path='/index' element={<IndexPage/>} />
       <Route path='/login' element={<Login/>} />
-      <Route path='/home' element={<Home/>}/>
+      <Route path='/' element={<Home/>}/>
       <Route path='/cars' element={<Cars/>}/> 
       <Route path='/appartement' element={<Appartement/>}/>
       <Route path='/tour' element={<Tour/>}/>
