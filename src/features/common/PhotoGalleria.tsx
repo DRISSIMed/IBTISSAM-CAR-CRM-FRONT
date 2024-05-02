@@ -26,7 +26,7 @@ export default function PhotoGalleria() {
     }, []);
 
     const itemTemplate = (item: { itemImageSrc: string | undefined; alt: string | undefined; }) => {
-        return <img src={item.itemImageSrc} alt={item.alt} style={{ width: '100%', height: '300px', display: 'block' }} />;
+        return <img src={item.itemImageSrc} alt={item.alt} style={{ width: '500px', height: '300px', display: 'block' }} />;
     }
 
     const thumbnailTemplate = (item: { thumbnailImageSrc: string | undefined; alt: string | undefined; }) => {

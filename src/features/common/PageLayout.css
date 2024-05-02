@@ -1,7 +1,5 @@
-body{
-    margin: 0;
+html, body {
     height: 100%;
-    width: 100%;
 }
 .Container__Common{
     display: flex;
@@ -70,7 +68,8 @@ body{
     padding: 10px;
 }
 .Children_div{
-    height: 100%;
+
+    height: 90%;
     width: 100%;
 
 }
@@ -80,19 +79,85 @@ body{
     background-color: white;
     font-size: 13px;
     width: 100%;
-    position:absolute;
-    margin-bottom: 0%;
+    margin-top: 20%;
+    bottom: 2px;
 }
 
 .nav_log{
     height: 70px;
-    background-color: aqua;
+    background-color: white;
     margin: 0;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
+}
+.flags__container{
+    display: flex;
+    flex-direction: row;
+}
+.flags__container img{
+    height: 30px;
+    height: 30px;
+    margin-left: 20px;
 }
 .sub_item{
+ 
+ margin-right: 10px;
+ display: flex;
+ flex-direction: column;
 
+
+}
+.sub_item_item{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    margin-top: 10px;
+    margin-left: 10px;
+    
+
+}
+.sub_item_item p{
+    margin: 0px;
+    margin-left: 10px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.sub_item_item img{
+    width: 20px;
+    height: 20px;
+}
+.options__languges{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 30px;
+    width: 30px;
+
+}
+.WhatsApp__Container{
+    bottom: 15%;
+    left: 95%;
+    margin: 0;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.WhatsApp__Container img{
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+}
+.item{
+    margin-top: 10px;
+}
+#arrow{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
 }

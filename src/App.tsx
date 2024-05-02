@@ -21,7 +21,7 @@ import 'primeflex/primeflex.css';
 function App() {
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename='/'>
     <Routes>
       <Route path='/index' element={<IndexPage/>} />
       <Route path='/login' element={<Login/>} />

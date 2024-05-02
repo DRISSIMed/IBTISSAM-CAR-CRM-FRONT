@@ -50,7 +50,7 @@ li{
     flex-direction: column;
     height: 100%;
     width: 100%;
-    background-color: #eeeeee;
+    background-color: #f7f7f7;
 }
 img{
     height: 40px;
@@ -65,10 +65,15 @@ img{
     margin: 0px;
     font-size: 14px;
 }
-.Title__Home h2{
-    margin-top: 20px;
-    height: 10%;
+.Title__Home{
+    display: flex;
+    background-color: white;
+    height:80px;
+    justify-content: center;
+    justify-items: center;
     width: 100%;
+}
+.Title__Home h2{
     text-align: center;
     color: gray;
 
@@ -122,6 +127,8 @@ label{
     flex-direction: row;
     justify-content: center;
     height: 100%;
+    margin-top: 20px;
+   
 }
 .Service__Element{
     border: 1px solid black;

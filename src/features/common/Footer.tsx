@@ -4,13 +4,13 @@ import { AiOutlineTwitter } from "react-icons/ai";
 import "./footer.css"
 
 
-export default function Footer() {
+export default function Footer(props:any) {
 
 
     return (
-        <div className="footer-dark" style={{marginTop:"15px"}}>
+        <div className="footer-dark" style={{marginTop:"15px"}} id={props.id}>
             <footer>
-                <div style={{ display: 'grid', justifyContent: 'center' }}>
+                <div style={{ display: 'grid', justifyContent: 'center'}}>
                     <div className="text-center ">
                         <div className="col item social">
                             <a href="#"><BsInstagram/></a>

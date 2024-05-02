@@ -1,0 +1,13 @@
+body{
+    margin: 0px;
+}
+.Conatainer_Stepper{
+  
+    margin-top: 100px;
+    bottom: 10px;
+   
+    margin-left: 30px;
+    margin-right: 30px;
+    align-self: center;
+ 
+}

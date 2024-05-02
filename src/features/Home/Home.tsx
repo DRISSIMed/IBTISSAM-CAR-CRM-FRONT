@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Home.css'
 import { useNavigate } from "react-router-dom";
 import Select from 'react-select';
-import audi from '../../Imgaes/audi.png'
-import house from '../../Imgaes/house.png'
-import tourIcon from '../../Imgaes/tour.png'
+
 import like from '../../Imgaes/like.png'
 import arrow from '../../Imgaes/arrow.png'
 import noLike from '../../Imgaes/noLike.png'
@@ -21,6 +19,8 @@ import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 import Statistic from '../common/Statistic';
 import PhotoGalleria from '../common/PhotoGalleria';
 import Info from '../common/Info';
+import CompanyServices from '../common/CompanyServices';
+import Stepper from '../common/StepperComponent';
 
 
 export default function Home() {
@@ -85,164 +85,14 @@ export default function Home() {
         <div className="Container__Home">
           
           <div className="Title__Home">
-            <h2>Car Rental in Morocco - Search & Save</h2>
+            <h2>{t("ttitleHome")}</h2>
           </div>
 
            <div>
            <Statistic/>
            </div>
 
-          <div className="Form">
-            <Formik
-              initialValues={{ email: '', password: '' }}
-              validate={values => {
-                const errors = {};
-
-                return errors;
-              }}
-              onSubmit={(values, { setSubmitting }) => {
-                setTimeout(() => {
-                  alert(JSON.stringify(values, null, 2));
-                  setSubmitting(false);
-                }, 400);
-              }}
-            >
-              {({
-                values,
-                errors,
-                touched,
-                handleChange,
-                handleBlur,
-                handleSubmit,
-                isSubmitting,
-                /* and other goodies */
-              }) => (
-                <form onSubmit={handleSubmit} >
-                  <div className='Form__Element'>
-                    <Select
-                      value={selectedOption}
-                      onChange={(e) => handleSelectInput(e)}
-                      styles={{
-                        control: (baseStyles, state) => ({
-                          ...baseStyles,
-                          borderColor: state.isFocused ? 'white' : 'white',
-                          border: 'none',
-                          width: '400px',
-                          outline: 'none'
-
-                        }),
-                      }}
-                      isSearchable={true}
-                      options={options}
-                      placeholder="Country"
-                    />
-                  </div>
-
-                  <div className='Form__Element'>
-                    <Select
-                      value={selectedOption}
-                      onChange={(e) => handleSelectInput(e)}
-                      styles={{
-                        control: (baseStyles, state) => ({
-                          ...baseStyles,
-                          borderColor: state.isFocused ? 'white' : 'white',
-                          border: 'none',
-                          width: '400px',
-                          outline: 'none'
-
-                        }),
-                      }}
-                      isSearchable={true}
-                      options={options}
-                      placeholder="Country"
-                    />
-                  </div>
-
-                  <div className='Form__Element'>
-                    <input
-                      type='date'
-                      id='dateStart'
-                    />
-                  </div>
-
-                  <div className='Form__Element'>
-
-                    <input
-                      type='date'
-
-
-                    />
-                  </div>
-
-
-                  <div className='Form__Element'>
-
-                    <input
-                      type='number'
-                      placeholder='Number person'
-                    />
-                  </div>
-                  <div className='Form__Element'>
-
-                    <div className='CheeckBox'>
-                      <input
-                        id="car"
-                        type="checkbox"
-                        name="check"
-                        value="car"
-
-                      />
-                      <label>
-                        Car
-                      </label>
-                    </div>
-                  </div>
-
-                  <div className='Form__Element'>
-
-                    <div className='CheeckBox'>
-                      <input
-                        id="yes"
-                        type="checkbox"
-                        name="check"
-                        value="true"
-
-                      />
-                      <label>
-                        Appartement
-                      </label>
-                    </div>
-                  </div>
-
-                  <div className='Form__Element'>
-
-                    <div className='CheeckBox'>
-                      <input
-                        id="yes"
-                        type="checkbox"
-                        name="check"
-                        value="true"
-
-                      />
-                      <label>
-                        Tours
-                      </label>
-                    </div>
-                  </div>
-
-
-
-                  <div className='Form__Element'>
-                    <button type="submit" onClick={handleSearch}>
-                      Search Now
-                    </button>
-                  </div>
-                </form>
-              )}
-            </Formik>
-
-          </div>
-
+        
 
           <div className="Body__Element__Container__Search">
 
@@ -306,62 +156,21 @@ export default function Home() {
                 })
 
                 :
-                <div className="Services__Container">
-                  <h3>Our services </h3>
-                  <div className="Services">
+              <>
+              
+              <div className="Title__Home">
+                    <h2>{t("tourservices")}</h2>
+              </div>
 
-                    <div className="Service__Element">
-                      <div className="Service__Element__Image">
-
-                        <img src={house} />
-                      </div>
-
-                      <div className="Service__Element__Container">
-                        <h3>{t("RentApartment")}</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In reiciendis quia consectetur nisi aliquam illo voluptate possimus maiores, qui repellat odit aperiam fuga repudiandae, modi, esse nam ducimus? Ullam, quam!</p>
-                      </div>
-                      <div className="Serivce_Element__Button">
-                        <button>Take your app</button>
-                      </div>
-                    </div>
-
-                    <div className="Service__Element">
-                      <div className="Service__Element__Image">
-                        <img src={audi} />
-                      </div>
-
-                      <div className="Service__Element__Container">
-                        <h3>{t("RentCar")}</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In reiciendis quia consectetur nisi aliquam illo voluptate possimus maiores, qui repellat odit aperiam fuga repudiandae, modi, esse nam ducimus? Ullam, quam!</p>
-
-                      </div>
-                      <div className="Serivce_Element__Button">
-                        <button>Take your car</button>
-                      </div>
-                    </div>
-
-                    <div className="Service__Element">
-                      <div className="Service__Element__Image">
-                        <img src={tourIcon} />
-                      </div>
-
-                      <div className="Service__Element__Container">
-                        <h3>Tour</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In reiciendis quia consectetur nisi aliquam illo voluptate possimus maiores, qui repellat odit aperiam fuga repudiandae, modi, esse nam ducimus? Ullam, quam!</p>
-
-                      </div>
-                      <div className="Serivce_Element__Button">
-                        <button>Take your Tour</button>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
+              <CompanyServices/>
+          
+              </>
             }
 
           </div>
         </div>
         <Info/>
+        <Stepper/>
       </div>
 
     </PageLayout>

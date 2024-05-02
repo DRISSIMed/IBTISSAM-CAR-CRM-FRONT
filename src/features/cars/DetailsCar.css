@@ -7,7 +7,7 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: #eeeeee;
+    background-color: #f7f7f7;
 
 }
 .Left__Side{
@@ -27,12 +27,17 @@ body{
 .Title__Left__Side{
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-items: center;
     background-color: white;
     border-radius: 15px;
     height: 50px;
+    margin-top: 10px;
     width: 100%;
+}
+.Price_Left_Side{
+    color: green;
+    font-weight: bolder;
 }
 
 .Title__Left__Side img{
@@ -75,9 +80,7 @@ body{
  align-self: center;
  align-items: center;
  margin-top: 15px;
-
-
- height: 40%;
+ height: 120px;
  width: 90%;
 }
 .Image__Right img{
@@ -107,6 +110,7 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    text-align: center;
     align-content: center;
     margin-top: 5px;
 }
@@ -122,15 +126,17 @@ body{
 
 .Text__Description{
     display: flex;
+    flex-direction: row;
     justify-content: center;
-    align-items: center;
     flex-direction: row;
     width:100px ;
+
 
 }
 .Text__Description p{
     font-weight: bold;
-    text-align: end;
+    margin: 10px;
+  
 }
 .Button__Counter{
     display: flex;
@@ -150,7 +156,7 @@ body{
     border-radius: 15px;
     margin-top: 20px;
     width: 70%;
-    height:90%;
+    height:300px;
     cursor: pointer;
 }
 .Global__Image img{
@@ -165,8 +171,8 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 30%;
-    height:30%;
+    width: 260px;
+    height:180px;
     box-shadow: 1px 1px 2px 2px #dfd7ca;
     background-color: white;
     border-radius: 15px;
@@ -182,9 +188,24 @@ body{
 .Colors__Car__Container{
     display: flex;
     flex-direction: row;
-    width: 40%;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
     margin-top: 30px;
     padding-bottom:2% ;
+}
+.Colors__Car__Container .colors{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 5px;
+    text-align: center;
+
+    width: fit-content;
+   
+}
+.colors h3{
+    color:gray
 }
 .Colors__Car__Container .Color__Car{
     height: 40px;
@@ -194,29 +215,7 @@ body{
     margin-left: 10px;
     background-color: white;
 }
-#id1{
-  background-color: rgb(247, 223, 223);
-}
-#id2{
-    background-color: rgb(156, 234, 253)
-  }
-  #id3{
-    background-color: white;
-  }
-  #id4{
-    background-color: rgb(86, 86, 86);
-  }
-  .Form__Reservation{
 
-     display: flex;
-     flex-direction: column;
-
-     align-items: center;
-    width: 100%;
-    height: 100%;
-  
-
-  }
   .Form__Reservation form{
     display: flex;
     flex-direction: row;
@@ -224,8 +223,9 @@ body{
     padding: 10px;
     justify-content: center;
     flex-wrap: wrap;
-    width: 40%;
+    width: 50%;
     height: 100%;
+
 
   }
   .Form__Reservation form button{
@@ -239,10 +239,124 @@ body{
     width: 90%;
  
   }
-.Form__Title{
+  .Form__Reservation{
+ 
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    margin-top: 50px;
+
+    margin-bottom: 10px;
+
+
+ } 
+.Take_car_title{
 display: flex;
+flex-direction: column;
 text-align: center;
+margin-top: 10px;
+margin-bottom: 100px;
+background-color: red;
+
   }
+.Recommendation_Conatiner{
+
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    padding: 10px;
+    flex-wrap: wrap;
+    width: 50%;
+    height: 500px;
+    background-color: white;
+    box-shadow: 1px 1px 2px 2px #dfd7ca;
+  }
+.Item_Recomendation_Container{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 100px;
+    width:95%;
+    background-color: white;
+    border-radius: 15px;
+
+    box-shadow: 1px 1px 2px 2px #dfd7ca;
+}
+.left_item_recommendation{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width:70%
+}
+.left_item_recommendation_image img{
+    height: 100%;
+    width: 100%;
+}
+.Right_item_recommendation{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%;
+    width:30%
+}
+.Right_item_recommendation button{
+    width: 80%;
+}
+.left_item_recommendation_description p{
+    margin:5px;
+    font-weight: bold;
+}
+.Message_Reserved{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 20px;
+
+}
+.Message_Annulation{
+    display: flex;
+    flex-direction: row;
+    border: 1px solid green;
+    justify-content: center;
+    border-radius: 15px;
+   align-items: center;
+    margin: 20px;
+    width: 500px;
+
+}
+
+.Message_Annulation .item{
+margin: 5px;
+display: flex;
+flex-direction: row; 
+padding: 10px;
+color: gray;
+
+}
+.Message_Annulation .item h4{
+    color: gray;
+}
+.Message_Annulation .item img{
+    height: 30px;
+    width:30px
+}
+.Message_Reserved .item{
+    margin: 5px;
+    display: flex;
+    align-items: center;
+  
+}
+.Message_Reserved .item img{
+    width: 40px;
+    height :30px
+  
+}
 .Input__View_Detail{
     display: flex;
     flex-direction: row;
@@ -284,11 +398,12 @@ text-align: center;
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-top: 30px;
     width: 80%;
 }
 .Question__Container p{
     margin: 0px;
-    font-weight: 600;
+    font-weight: 500;
 }
 .Question__Container .Option__Answer{
     display: flex;
@@ -313,4 +428,80 @@ text-align: center;
     font-weight: 300;
     margin: 0px;
     
+}
+.reserved_car{
+    display: flex ;
+    flex-direction: column;
+    justify-items: center ;  
+    justify-content: center;
+    padding-top: 30px;
+    background-color: white;
+    height: 250px;
+    margin-left: 15px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}
+.reserved_car h1{
+  margin: 0;
+  padding: 1px;
+  font-weight: bold;
+  align-self: center;
+  color: black;
+
+}
+.conditon__item{
+    display: flex;
+    flex: row;
+    margin-top: 15px;
+    justify-content: center;
+}
+.conditon__item img{
+    height: 30px;
+    width:30px;
+
+}
+.conditon__item p{
+    font-weight: 600;
+    height: 30px;
+    width: 300px;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    
+
+}
+
+@media(max-width:900px){
+    .Container__Detail{
+        display: flex;
+        flex-direction: column;
+        background-color: red;
+        align-items: center;
+    }
+    .Secondaire__Images{
+        display: flex;
+        flex-direction: column;
+        background-color: red;
+        align-items: center;
+
+    }
+
+    .Left__Side{
+        width:90%;
+
+    }
+    .Right__Side{
+        width:100%;
+    }
+    .Form__Reservation{
+        display: flex;
+        flex-direction: column;
+    }
+    .Recommendation_Conatiner{
+        width:90%
+    }
+    .Form__Reservation form{
+        width:90%
+    }
+
 }

@@ -12,13 +12,14 @@ import './Rate.css'
 import Appartement from '../Appartement/Appartement';
 import { Card } from 'primereact/card';
 import { Rating, RatingChangeEvent } from "primereact/rating";
-import { colors } from '@mui/material';
+import { useTranslation } from "react-i18next";
 
 export default function Rate(subject: any) {
 
   const [rating, setRating] = useState<number | null>(null);
   const [comment, setComment] = useState('')
   const [commentData, setCommentData] = useState<any>([])
+  const { t, i18n } = useTranslation();
   const handleCommentSubmit = (e: React.FormEvent<HTMLInputElement>) => {
     setComment(e.currentTarget.value)
   }
@@ -55,6 +56,7 @@ export default function Rate(subject: any) {
         response.json())
       .then((response: any) => {
         setComment('')
+        setRating(null)
         setCommentData([response, ...commentData])
         if (response) {
           toast.success("Comment added !", { className: 'toast-message' });
@@ -112,8 +114,8 @@ export default function Rate(subject: any) {
 
         <Card title={header} >
           <Avatar value='MD' round={true} size='30px' style={{ marginLeft: '10px' }} />
-          <input type="text" style={{ width: '90%' }} value={comment} onChange={(e: React.FormEvent<HTMLInputElement>) => handleCommentSubmit(e)} placeholder='add your comment ...' />
-          <BiCommentAdd style={{ cursor: 'pointer', marginTop: '6px' }} size="25px" onClick={addComment} />
+          <input type="text" style={{ width: '90%' }} value={comment} onChange={(e: React.FormEvent<HTMLInputElement>) => handleCommentSubmit(e)} placeholder={t("tAddComment")} />
+         {(comment && comment!==null)?<BiCommentAdd style={{ cursor: 'pointer', marginTop: '6px' }} size="25px" onClick={addComment} />:""}
 
         </Card>
       </div>
@@ -140,7 +142,7 @@ export default function Rate(subject: any) {
                     <p>{e.comment}</p>
                   </div>
                   <div className="Remove__Container">
-                    <img src={remove} onClick={() => handleRemoveComment(e.id)} />
+                    <img src={remove}  onClick={() => handleRemoveComment(e.id)} />
                   </div>
 
 
@@ -161,7 +163,7 @@ export default function Rate(subject: any) {
 
         : <div className="No__Comment">
           <img src={noComment} />
-          <h3>No comment be the first </h3>
+          <h3> {t("tNoComment")}  </h3>
         </div>}
 
 

@@ -17,10 +17,7 @@ import PageLayout from '../common/PageLayout'
 const override: CSSProperties = {
   display: 'flex',
   flexDirection: 'row',
-  justifyContent: 'center',
-  alignContent: 'center',
-  alignItems: 'center',
-  textAlign: 'center'
+  textAlign:'center'
 
 };
 
@@ -132,6 +129,7 @@ export default function Cars() {
               })
 
               :
+              <div style={{display:'flex',flexDirection:'row',justifyContent:'center'}}>
               <RiseLoader
                 color='#36d7b7'
                 loading={Loading}
@@ -140,6 +138,7 @@ export default function Cars() {
                 aria-label="Loading Spinner"
                 data-testid="loader"
               />
+              </div>
 
           }
 
@@ -165,7 +164,7 @@ export default function Cars() {
                     </div>
                     <div className="Description">
                       <div className="Info__Car__Index">
-                        <p style={{ color: 'green', fontWeight: 'bold', fontSize: '12px' }}>${e.price}</p>
+                        <p style={{ color: 'green', fontWeight: 'bold', fontSize: '14px' }}>${e.price} <span style={{textDecoration:'line-through',marginLeft:'10px',color:'red',fontSize:'12px'}}>$127</span></p>
                         <p style={{ fontWeight: 'bold' }}>
                           {e.libelle}
                         </p>
@@ -206,6 +205,7 @@ export default function Cars() {
               })
 
               :
+              <div style={{display:'flex',flexDirection:'row',justifyContent:'center'}}>
               <RiseLoader
                 color='#36d7b7'
                 loading={Loading}
@@ -214,6 +214,7 @@ export default function Cars() {
                 aria-label="Loading Spinner"
                 data-testid="loader"
               />
+              </div>
           }
 
 

@@ -11,12 +11,21 @@
 label{
   font-weight: bold;
 } */
-Link{
-  color: black;
+.link {
+  color: #FFF;
+}
+.link:hover {
+   color:#eeeeee
 }
 .toast-message{
   width:500px;
   margin-right: 100px;
   font-weight: bold;
+  
+}
+html,body{
+  margin: 0;
+  height: 100%;
+
   
 }

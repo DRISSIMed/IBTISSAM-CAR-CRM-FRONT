@@ -6,7 +6,12 @@ import location from '../../Imgaes/location.png'
 import speed from '../../Imgaes/speed.png'
 import user from '../../Imgaes/man.png'
 import calendar from '../../Imgaes/calendar.png'
+import  roueIcon from '../../Imgaes/roue.png'
+import  autoBebe from '../../Imgaes/autoBebe.png'
+import  clemaIcon from '../../Imgaes/clema.png'
 import ageIcon from '../../Imgaes/adultAge.png'
+import alertIcon from '../../Imgaes/alert.png'
+ import validtIcon from '../../Imgaes/valid.png'
 import emailIcon from '../../Imgaes/mail.png'
 import phoneIcon from '../../Imgaes/telephone.png'
 import identityIcon from '../../Imgaes/card.png'
@@ -21,14 +26,20 @@ import Rate from '../common/Rate'
 import { UrlApi } from '../common/Util'
 import Select from 'react-select';
 import { toast } from 'react-toastify';
-
+import { useTranslation } from "react-i18next";
+import StepperComponent from '../common/StepperComponent'
+import { useNavigate } from "react-router-dom";
 export default function DetailsCar() {
     const [email, setEmail] = useState('');
     const [password, setPassord] = useState('')
     const [dataList, setDataList] = useState(Object)
+    const [recommendationList,setRecommendationList]=useState(Object)
     const [itemId, setItemId] = useState();
+    const[countDays,setCountDays]=useState(1);
     const [isHaveChildren, setIsHaveChildren] = useState<Boolean>(false)
     const [initialCheckedValue, setInitialCheckedValue] = useState<boolean>(true)
+    const { t, i18n } = useTranslation();
+    const navigate = useNavigate();
     console.log("ITEM ID INSIDE DETAIL ==>", itemId)
     let { id } = useParams();
     const formik = useFormik({
@@ -106,23 +117,36 @@ export default function DetailsCar() {
 
 
     useEffect(() => {
-        fetch(UrlApi + 'range-car/get/' + id, {
-        })
-            .then(response => response.json())
-            .then(response => {
-                console.log('RESPONSE ', response)
-                let data = response
-                setDataList(data)
-                setItemId(data.id)
-                // setTimeout(()=>console.log("inisde state", setDataList(json)  ),1000)
-                setTimeout(() => console.log("inisde state", dataList), 1000)
-                setTimeout(() => console.log("lentgh", dataList.id), 1000)
-            })
-            .catch(function (error) {
-                console.error(error)
-            })
+        loadItem();
     }
         , [])
+
+const loadItem=()=>{
+            fetch(UrlApi + 'range-car/get/' + id, {
+            })
+                .then(response => response.json())
+                .then(response => {
+                    console.log('RESPONSE ', response)
+                    let data = response
+                    setDataList(data)
+                    setItemId(data.id)
+                    // call the recommendation gamme
+                    fetch(UrlApi + 'range-car/get/by-gamme/' + data.gamme, {
+                    })
+                        .then(response => response.json())
+                        .then(response => {
+                            console.log('RESPONSE ', response)
+                            let data = response
+                            setRecommendationList(data)   
+                        })
+                        .catch(function (error) {
+                            console.error(error)
+                        })
+                })
+                .catch(function (error) {
+                    console.error(error)
+                })
+        }
 
     const onlyOne = (checkbox: string) => {
         const checkboxes = document.getElementsByName('check')
@@ -181,21 +205,41 @@ export default function DetailsCar() {
         setSelectedOption(e)
         formik.values.country = e.label
     }
+  const minceDays=()=>{
+       if(countDays > 1 ){
+         setCountDays(countDays-1)
+       }
+       else{
+        return;
+       }
+  }
+  const cheeckOffre=(id:any)=>{
+     navigate('/details-car/'+id)
+     
+    // window.scrollTo({top: 0, left: 0, behavior: 'smooth'})
+    // //loadItem();
+    window.scrollTo(0, 0);
+    window.location.reload();
+    
+    // Scroll to the top of the page
 
+    
+   
+ ;
+  }    
     return (
         <PageLayout>
-            <div style={{ height: '100%', paddingTop: '100px' }}>
+            <div style={{ height: '100%',padding:'20px' }}>
                 {
                     dataList ?
-
-
                         <div className='Container__Detail' key={dataList.id}>
 
                             <div className="Left__Side">
 
                                 <div className="Title__Left__Side">
 
-                                    <h1> {dataList.libelle}</h1>
+
+                                    <h2> Votre {dataList.libelle} à partir du <span className='Price_Left_Side'>{dataList.price} $/Day</span></h2>
 
 
                                 </div>
@@ -222,11 +266,41 @@ export default function DetailsCar() {
 
                                 <div className="Colors__Car__Container">
 
-                                    <div className="Color__Car" id='id1' ></div>
-                                    <div className="Color__Car" id='id2'></div>
-                                    <div className="Color__Car" id='id3'></div>
-                                    <div className="Color__Car" id='id4'></div>
+                                    <div className="colors" >
+                                        <h3>{t("taviableColors")}</h3>                                 
+                                    </div>
+
+                                    <div className="colors">
+                                        <div className="Color__Car"  style={{backgroundColor:dataList.colorOne}} ></div>
+                                        <div className="Color__Car" style={{backgroundColor:dataList.colorTwo}} ></div>
+                                        <div className="Color__Car" style={{backgroundColor:dataList.colorThree}} ></div>
+                                        <div className="Color__Car" style={{backgroundColor:dataList.colorFor}} ></div>
+                                    </div>
+                                 
                                 </div>
+
+                                <div className="Colors__Car__Container">
+
+                                    <div className="colors" >
+                                        <h3>{t("tavailableQuantity")} <span style={{marginLeft:"10px",fontWeight:'bold'}}>{dataList.qantity}</span></h3>                                 
+                                    </div>                             
+                                </div>
+                                {dataList.isReserved ? 
+                                    <div className="Message_Reserved">
+                                        <div className="item"><img src={alertIcon}/></div>
+                                        <div className="item"><h4>{t("tAlredyReserved")}</h4></div>
+                                        
+                                    </div> 
+                                :
+                                ''
+                                }
+
+                                  <div className="Message_Annulation">
+                                        <div className="item"><img src={validtIcon}/></div>
+                                        <div className="item"><h4>{t("tAnnulation")}</h4></div>
+                                        
+                                    </div> 
+                              
                             </div>
 
                             <div className="Right__Side">
@@ -277,8 +351,42 @@ export default function DetailsCar() {
                                                 </div>
 
                                             </div>
+                                        </div>
+                                        <div className="Info__Car">
+                                            <div className="Info__Car__Description">
+                                                <img src={roueIcon} />
+                                            </div>
+                                            <div className="Info__Car__Description">
+                                                <div className="Text__Description">
+                                                    <p>Aluminium</p>
+                                                </div>
 
+                                            </div>
+                                        </div>
 
+                                        <div className="Info__Car">
+                                            <div className="Info__Car__Description">
+                                                <img src={clemaIcon} />
+                                            </div>
+                                            <div className="Info__Car__Description">
+                                                <div className="Text__Description">
+                                                    <p>climatisée</p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        
+                                        <div className="Info__Car">
+                                            <div className="Info__Car__Description">
+                                                <img src={autoBebe} />
+                                            </div>
+                                            <div className="Info__Car__Description">
+                                                <div className="Text__Description">
+                                                    <p>siége auto</p>
+                                                </div>
+
+                                            </div>
                                         </div>
 
                                         <div className="Info__Car">
@@ -298,12 +406,12 @@ export default function DetailsCar() {
                                             <div className="Info__Car__Description">
                                                 <img src={calendar} />
                                                 <div className="Button__Counter">
-                                                    <button>+</button>
-                                                    <button>-</button>
+                                                    <button onClick={()=>setCountDays(countDays+1)}>+</button>
+                                                    <button onClick={minceDays}>-</button>
                                                 </div>
                                             </div>
                                             <div className="Info__Car__Description">
-                                                <div className="Text__Description"> <p>0 Day</p></div>
+                                                <div className="Text__Description"> <p>{countDays} Day(s)</p></div>
 
 
                                             </div>
@@ -320,6 +428,7 @@ export default function DetailsCar() {
                                 </div>
 
                             </div>
+                          
                         </div>
 
 
@@ -327,16 +436,19 @@ export default function DetailsCar() {
                         'not'
                 }
 
-
+                        <StepperComponent/>
+{/* 
+                   <div className="Take_car_title">
+                        <h1>{t("ttakeYourCarNow")}</h1>
+                    </div>
+                   */}
 
                 <div className="Form__Reservation">
-                    <div className="Form__Title">
-                        <h1>Take your car now !</h1>
-                    </div>
+
                     <form onSubmit={formik.handleSubmit} id="form">
                         <div className="Title__Information">
-                            <h3>Information about you</h3>
-                            <p>Enter the fields below to reserve your car</p>
+                            <h3> {t("tpersonalINformation")}</h3>
+                            <p> {t("tfilesBelow")}</p>
                         </div>
 
 
@@ -348,7 +460,7 @@ export default function DetailsCar() {
                             <div className="Input__Pad">
                                 <input
                                     id="nameComplet"
-                                    placeholder='Name'
+                                    placeholder= {t("tname")}
                                     type="text"
                                     onChange={formik.handleChange}
                                     value={formik.values.nameComplet}
@@ -370,7 +482,7 @@ export default function DetailsCar() {
                             <div className="Input__Pad">
                                 <input
                                     id="email"
-                                    placeholder='Email'
+                                    placeholder= {t("temail")}
                                     type="text"
                                     onChange={formik.handleChange}
                                     value={formik.values.email}
@@ -405,7 +517,7 @@ export default function DetailsCar() {
                                     }}
                                     isSearchable={true}
                                     options={options}
-                                    placeholder="Country"
+                                    placeholder= {t("tcountry")}
                                 />
                             </div>
                             {formik.touched.country && formik.errors.country && (
@@ -422,7 +534,7 @@ export default function DetailsCar() {
                             <div className="Input__Pad">
                                 <input
                                     id="phoneNumber"
-                                    placeholder='Phone Number'
+                                    placeholder= {t("tphoneNumber")}
                                     type="text"
                                     onChange={formik.handleChange}
                                     value={formik.values.phoneNumber}
@@ -442,7 +554,7 @@ export default function DetailsCar() {
                             <div className="Input__Pad">
                                 <input
                                     id="age"
-                                    placeholder='Age'
+                                    placeholder= {t("tage")}
                                     type="number"
                                     onChange={formik.handleChange}
                                     value={formik.values.age}
@@ -463,7 +575,7 @@ export default function DetailsCar() {
                                 <input
                                     id="nbrOfPersons"
                                     type="number"
-                                    placeholder='Number of person'
+                                    placeholder= {t("tnumberOfPerson")}
                                     onChange={formik.handleChange}
                                     value={formik.values.nbrOfPersons}
 
@@ -486,7 +598,7 @@ export default function DetailsCar() {
                                     id="identityCard"
                                     type="text"
                                     onChange={formik.handleChange}
-                                    placeholder="Identity"
+                                    placeholder= {t("tidentityCard")}
                                     value={formik.values.identityCard}
                                 />
 
@@ -510,7 +622,7 @@ export default function DetailsCar() {
                                 <input
                                     id="driveLicense"
                                     type="text"
-                                    placeholder='Drive license'
+                                    placeholder= {t("tdriveLicense")}
                                     onChange={formik.handleChange}
                                     value={formik.values.driveLicense}
                                 />
@@ -522,7 +634,7 @@ export default function DetailsCar() {
                         </div>
 
                         <div className='Question__Container'>
-                            <p>Do you have childrens ?</p>
+                            <p>{t("tQuestion")}</p>
                             <div className='Option__Answer'>
                                 <input
                                     id="yes"
@@ -532,7 +644,7 @@ export default function DetailsCar() {
                                     onClick={() => onlyOne("yes")}
                                 />
                                 <label>
-                                    Yes
+                                {t("tYes")}
                                 </label>
                             </div>
 
@@ -546,7 +658,7 @@ export default function DetailsCar() {
                                     onClick={() => onlyOne("no")}
                                 />
                                 <label>
-                                    No
+                                {t("tNo")}
                                 </label>
                             </div>
 
@@ -562,6 +674,8 @@ export default function DetailsCar() {
                                         id="nbrOfPerson"
                                         name="nbrOfChildrens"
                                         type="number"
+                                        max="4"
+                                        min='0'
                                         value={formik.values.nbrOfChildrens}
                                         placeholder='Number of childrens'
                                         onChange={formik.handleChange}
@@ -580,8 +694,78 @@ export default function DetailsCar() {
 
 
 
-                        <button type="submit" onClick={() => formik.handleSubmit}>Submit</button>
+                        <button type="submit" onClick={() => formik.handleSubmit}>{t("tSave")}</button>
                     </form>
+
+                    <div className="Recommendation_Conatiner">
+                    <div className="Title__Information">
+                            <h3> {t("tRecommendationForYou")}</h3>
+                            <p> {t("tRecommendationDescribe")}</p>
+                        </div>
+
+                               {recommendationList && recommendationList.length>0?
+                                recommendationList.map(function (e: {
+                                    id: any
+                                    libelle: any
+                                    price: any
+                                    picture: any
+                                    code: any
+                    
+                                  }): any {
+                                    if(e.id==id)
+                                    return;
+                                 else
+                                    return (
+                                        
+                                          
+                               <div className="Item_Recomendation_Container">
+                                    
+                               <div className="left_item_recommendation">
+                                       <div className="left_item_recommendation_image">
+                                           <img src={'../Cars/'+e.picture+'.png'} alt="" />
+                                       </div>
+                                       <div className="left_item_recommendation_description">
+                                       <p>
+                                                   <span style={{fontWeight:'100',color:'gray'}}>A partir du </span>
+                                                   <span style={{color:'green'}}>100$/Day</span>
+                                               </p>
+                                           <p>{e.libelle}</p>
+                                       </div>
+                               </div>
+
+                               <div className="Right_item_recommendation">
+                                   <button onClick={()=>cheeckOffre(e.id)} >Cheeck offre</button>
+                                   
+                               </div>
+
+                          </div>
+                                    )}
+                                    
+                                    )
+                              
+                               :
+                               
+                               ''
+                               }
+
+                    </div>
+
+                </div>
+
+                <div className="reserved_car">
+                    <h1>{t("tWhatido")}</h1>
+                    <div className="conditon__item">
+                        <img src={validtIcon} alt="" />
+                        <p>Check available qantity of car </p>
+                    </div>
+                    <div className="conditon__item">
+                       <img src={validtIcon} alt="" />
+                        <p>Contact Admnistration via WhatsApp </p>
+                    </div>
+                    <div className="conditon__item">
+                    <img src={validtIcon} alt="" />
+                        <p>have a great conversation </p>
+                    </div>
 
                 </div>
 
