@@ -1,29 +1,11 @@
 import React, { useState, useEffect, HtmlHTMLAttributes } from 'react'
-import audi from '../../Imgaes/audi.png'
-import house from '../../Imgaes/house.png'
-import fuel from '../../Imgaes/fuel.png'
-import location from '../../Imgaes/location.png'
-import speed from '../../Imgaes/speed.png'
-import user from '../../Imgaes/man.png'
-import calendar from '../../Imgaes/calendar.png'
-import  roueIcon from '../../Imgaes/roue.png'
-import  autoBebe from '../../Imgaes/autoBebe.png'
-import  clemaIcon from '../../Imgaes/clema.png'
-import ageIcon from '../../Imgaes/adultAge.png'
-import alertIcon from '../../Imgaes/alert.png'
- import validtIcon from '../../Imgaes/valid.png'
-import emailIcon from '../../Imgaes/mail.png'
-import phoneIcon from '../../Imgaes/telephone.png'
-import identityIcon from '../../Imgaes/card.png'
-import drivingIcon from '../../Imgaes/driving.png'
-import countryIcon from '../../Imgaes/country.png'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useParams } from "react-router-dom";
 import './DetailsCar.css'
 import PageLayout from '../common/PageLayout'
 import Rate from '../common/Rate'
-import { UrlApi } from '../common/Util'
+import { UrlApi,getPublicImagePath } from '../common/Util'
 import Select from 'react-select';
 import { toast } from 'react-toastify';
 import { useTranslation } from "react-i18next";
@@ -174,7 +156,7 @@ const loadItem=()=>{
     for (let i = 0; i < formik.values.nbrOfChildrens; i++) {
         let subData = <div className="Input__View_Detail">
             <div className="Input__Icon__Detail">
-                <img src={ageIcon} alt="" />
+                <img src={getPublicImagePath('ageIcon.png')} alt="" />
             </div>
             <div className="Input__Pad">
                 <input
@@ -287,7 +269,7 @@ const loadItem=()=>{
                                 </div>
                                 {dataList.isReserved ? 
                                     <div className="Message_Reserved">
-                                        <div className="item"><img src={alertIcon}/></div>
+                                        <div className="item"><img src={getPublicImagePath('alert.png')}/></div>
                                         <div className="item"><h4>{t("tAlredyReserved")}</h4></div>
                                         
                                     </div> 
@@ -296,7 +278,7 @@ const loadItem=()=>{
                                 }
 
                                   <div className="Message_Annulation">
-                                        <div className="item"><img src={validtIcon}/></div>
+                                        <div className="item"><img src={getPublicImagePath('valid.png')}/></div>
                                         <div className="item"><h4>{t("tAnnulation")}</h4></div>
                                         
                                     </div> 
@@ -319,7 +301,7 @@ const loadItem=()=>{
 
                                         <div className="Info__Car">
                                             <div className="Info__Car__Description">
-                                                <img src={location} />
+                                                <img src={getPublicImagePath('location.png')} />
                                             </div>
                                             <div className="Info__Car__Description">
                                                 <div className="Text__Description"><p>Marrakech</p></div>
@@ -330,7 +312,7 @@ const loadItem=()=>{
 
                                         <div className="Info__Car">
                                             <div className="Info__Car__Description">
-                                                <img src={speed} />
+                                                <img src={getPublicImagePath('speed.png')} />
                                             </div>
                                             <div className="Info__Car__Description">
                                                 <div className="Text__Description">
@@ -343,7 +325,7 @@ const loadItem=()=>{
 
                                         <div className="Info__Car">
                                             <div className="Info__Car__Description">
-                                                <img src={fuel} />
+                                                <img src={getPublicImagePath('fuel.png')} />
                                             </div>
                                             <div className="Info__Car__Description">
                                                 <div className="Text__Description">
@@ -354,7 +336,7 @@ const loadItem=()=>{
                                         </div>
                                         <div className="Info__Car">
                                             <div className="Info__Car__Description">
-                                                <img src={roueIcon} />
+                                                <img src={getPublicImagePath('roueIcon.png')} />
                                             </div>
                                             <div className="Info__Car__Description">
                                                 <div className="Text__Description">
@@ -366,7 +348,7 @@ const loadItem=()=>{
 
                                         <div className="Info__Car">
                                             <div className="Info__Car__Description">
-                                                <img src={clemaIcon} />
+                                                <img src={getPublicImagePath('clemaIcon.png')} />
                                             </div>
                                             <div className="Info__Car__Description">
                                                 <div className="Text__Description">
@@ -379,7 +361,7 @@ const loadItem=()=>{
                                         
                                         <div className="Info__Car">
                                             <div className="Info__Car__Description">
-                                                <img src={autoBebe} />
+                                                <img src={getPublicImagePath('autoBebe.png')} />
                                             </div>
                                             <div className="Info__Car__Description">
                                                 <div className="Text__Description">
@@ -391,7 +373,7 @@ const loadItem=()=>{
 
                                         <div className="Info__Car">
                                             <div className="Info__Car__Description">
-                                                <img src={user} />
+                                                <img src={getPublicImagePath('user.png')} />
                                             </div>
                                             <div className="Info__Car__Description">
                                                 <div className="Text__Description"> <p>4</p></div>
@@ -404,7 +386,7 @@ const loadItem=()=>{
 
                                         <div className="Info__Car">
                                             <div className="Info__Car__Description">
-                                                <img src={calendar} />
+                                                <img src={getPublicImagePath('calendar.png')} />
                                                 <div className="Button__Counter">
                                                     <button onClick={()=>setCountDays(countDays+1)}>+</button>
                                                     <button onClick={minceDays}>-</button>
@@ -454,7 +436,7 @@ const loadItem=()=>{
 
                         <div className="Input__View_Detail">
                             <div className="Input__Icon__Detail">
-                                <img src={user} alt="" />
+                                <img src={getPublicImagePath('user.png')} alt="" />
 
                             </div>
                             <div className="Input__Pad">
@@ -476,7 +458,7 @@ const loadItem=()=>{
 
                         <div className="Input__View_Detail">
                             <div className="Input__Icon__Detail">
-                                <img src={emailIcon} alt="" />
+                                <img src={getPublicImagePath('mail.png')} alt="" />
 
                             </div>
                             <div className="Input__Pad">
@@ -499,7 +481,7 @@ const loadItem=()=>{
 
                         <div className="Input__View_Detail">
                             <div className="Input__Icon__Detail">
-                                <img src={countryIcon} alt="" />
+                                <img src={getPublicImagePath('country.png')} alt="" />
 
                             </div>
                             <div className="Input__Pad">
@@ -528,7 +510,7 @@ const loadItem=()=>{
 
                         <div className="Input__View_Detail">
                             <div className="Input__Icon__Detail">
-                                <img src={phoneIcon} alt="" />
+                                <img src={getPublicImagePath('telephone.png')} alt="" />
 
                             </div>
                             <div className="Input__Pad">
@@ -548,7 +530,7 @@ const loadItem=()=>{
 
                         <div className="Input__View_Detail">
                             <div className="Input__Icon__Detail">
-                                <img src={ageIcon} alt="" />
+                                <img src={getPublicImagePath('ageIcon.png')} alt="" />
 
                             </div>
                             <div className="Input__Pad">
@@ -568,7 +550,7 @@ const loadItem=()=>{
 
                         <div className="Input__View_Detail">
                             <div className="Input__Icon__Detail">
-                                <img src={user} alt="" />
+                                <img src={getPublicImagePath('user.png')} alt="" />
 
                             </div>
                             <div className="Input__Pad">
@@ -590,7 +572,7 @@ const loadItem=()=>{
 
                         <div className="Input__View_Detail">
                             <div className="Input__Icon__Detail">
-                                <img src={identityIcon} alt="" />
+                                <img src={getPublicImagePath('card.png')} alt="" />
 
                             </div>
                             <div className="Input__Pad">
@@ -615,7 +597,7 @@ const loadItem=()=>{
 
                         <div className="Input__View_Detail">
                             <div className="Input__Icon__Detail">
-                                <img src={drivingIcon} alt="" />
+                                <img src={getPublicImagePath('driving.png')} alt="" />
 
                             </div>
                             <div className="Input__Pad">
@@ -666,7 +648,7 @@ const loadItem=()=>{
                         {isHaveChildren ? <>
                             <div className="Input__View_Detail">
                                 <div className="Input__Icon__Detail">
-                                    <img src={user} alt="" />
+                                    <img src={getPublicImagePath('user.png')} alt="" />
 
                                 </div>
                                 <div className="Input__Pad">
@@ -755,15 +737,15 @@ const loadItem=()=>{
                 <div className="reserved_car">
                     <h1>{t("tWhatido")}</h1>
                     <div className="conditon__item">
-                        <img src={validtIcon} alt="" />
+                        <img src={getPublicImagePath('valid.png')} alt="" />
                         <p>Check available qantity of car </p>
                     </div>
                     <div className="conditon__item">
-                       <img src={validtIcon} alt="" />
+                       <img src={getPublicImagePath('valid.png')} alt="" />
                         <p>Contact Admnistration via WhatsApp </p>
                     </div>
                     <div className="conditon__item">
-                    <img src={validtIcon} alt="" />
+                    <img src={getPublicImagePath('valid.png')} alt="" />
                         <p>have a great conversation </p>
                     </div>
 

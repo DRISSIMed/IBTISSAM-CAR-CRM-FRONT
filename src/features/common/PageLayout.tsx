@@ -1,24 +1,13 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import pic from '../../Imgaes/profile.png'
-import { FiUser, FiHome, FiRefreshCw, FiList } from "react-icons/fi";
 import { Menubar } from 'primereact/menubar';
 import { MenuItem } from 'primereact/menuitem';
-import whatsapp from '../../Imgaes/whatsapp.png'
-import arrowTop from '../../Imgaes/arrowTop.png'
-import arrowDown from '../../Imgaes/arrowDown.png'
-import localisation from '../../Imgaes/location.png'
-import maroc from '../../Imgaes/maroc.png'
-import france from '../../Imgaes/france.png'
-import english from '../../Imgaes/english.png'
-import monde from '../../Imgaes/monde.png'
-import clock from '../../Imgaes/horloge.png'
 
 import './PageLayout.css'
 import Footer from './Footer';
 import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 import { useTranslation } from "react-i18next";
-import { use } from 'i18next';
+import { getPublicImagePath } from '../common/Util'
 
 interface Languages {
         name: string;
@@ -31,16 +20,16 @@ export default function PageLayout({ children, }: { children: React.ReactNode | 
         const[oldScrollY,setOldScrollY]=useState(0)
         const onNavigate=()=>{
                 if(window.scrollY > oldScrollY) {
-                        setArrowPosition(<a href="#DOWN"><img src={arrowDown} onClick={onNavigate} id="arrow"/></a>)
+                        setArrowPosition(<a href="#DOWN"><img src={getPublicImagePath('arrowDown.png')} onClick={onNavigate} id="arrow"/></a>)
                     } else {
-                        setArrowPosition(<a href="#TOP"><img src={arrowTop} onClick={onNavigate} id="arrow"/></a>)
+                        setArrowPosition(<a href="#TOP"><img src={getPublicImagePath('arrowTop.png')} onClick={onNavigate} id="arrow"/></a>)
                     }
                     setOldScrollY(window.scrollY)
               
                
         }
 
-        const [arrowPosition,setArrowPosition]=useState(<a href='#DOWN'><img src={arrowDown} onClick={onNavigate} id="arrow"/></a>);
+        const [arrowPosition,setArrowPosition]=useState(<a href='#DOWN'><img src={getPublicImagePath('arrowDown.png')} onClick={onNavigate} id="arrow"/></a>);
 
         const items: MenuItem[] = [
                 {      //{t("RentApartment")}
@@ -75,7 +64,7 @@ export default function PageLayout({ children, }: { children: React.ReactNode | 
                 },
         ];
 
-        const end = <img alt="logo" src={pic} height="40" className="mr-2"></img>;
+        const end = <img alt="logo" src={getPublicImagePath('profile.png')} height="40" className="mr-2"></img>;
         const [selectedLg, setSelectedLg] = useState<Languages | null>();
         const countries: Languages[] = [
                 { name: 'English', value: 'en' },
@@ -108,21 +97,21 @@ export default function PageLayout({ children, }: { children: React.ReactNode | 
                                   
                                         <div className='sub_item'>
                                                 <div className='sub_item_item'>
-                                                        <img src={localisation} alt="" />
+                                                        <img src={getPublicImagePath('location.png')} alt="" />
                                                         <p>Marrakech,rue n°12</p>
                                                 </div>
                                                
                                                 <div className='sub_item_item'>
-                                                        <img src={clock} alt="" />
+                                                        <img src={getPublicImagePath('horloge.png')} alt="" />
                                                         <p>{t("tOvert")}</p>
                                                 </div>
                                         </div>
                                         <div className='sub_item'>
                                                 <div className="flags__container">
-                                                        <img src={maroc} alt="" />
-                                                        <img src={france} alt="" />
-                                                        <img src={english} alt="" />
-                                                        <img src={monde} alt="" />
+                                                        <img src={getPublicImagePath('maroc.png')} alt="" />
+                                                        <img src={getPublicImagePath('france.png')} alt="" />
+                                                        <img src={getPublicImagePath('english.png')} alt="" />
+                                                        <img src={getPublicImagePath('monde.png')} alt="" />
                                                 </div>
 
                                         </div>
@@ -141,7 +130,7 @@ export default function PageLayout({ children, }: { children: React.ReactNode | 
                         </div>
                         <div className='WhatsApp__Container'>
                                 <div className="item">
-                                         <img src={whatsapp} alt="" />
+                                         <img src={getPublicImagePath('whatsapp.png')} alt="" />
                                  </div>
 
                                  <div className="item">

@@ -1,13 +1,8 @@
 import React, { useState,CSSProperties, useEffect } from 'react'
-import { UrlApi } from '../common/Util'
-import like from '../../Imgaes/like.png'
-import arrow  from '../../Imgaes/arrow.png'
-import location from '../../Imgaes/location.png'
-import user from '../../Imgaes/user.png'
+import { UrlApi,getPublicImagePath } from '../common/Util'
 import { useNavigate } from "react-router-dom";
 import PageLayout from '../common/PageLayout'
 import './Appartement.css'
-import noLike from '../../Imgaes/noLike.png'
 import RiseLoader from "react-spinners/RiseLoader";
 import {toast } from 'react-toastify';
 import { red } from '@mui/material/colors'
@@ -42,11 +37,11 @@ export default function Appartement() {
    
         const element= document.getElementById(id) as HTMLInputElement
         console.log("ELEMENT",element)
-         if(element.src==='http://localhost:3000'+noLike ){
+         if(element.src==='http://localhost:3000'+getPublicImagePath('noLike.png') ){
            toast.success("Thank you !",{className: 'toast-message'});
-           element.src=like
+           element.src=getPublicImagePath('like.png')
           }else{
-           element.src=noLike
+           element.src=getPublicImagePath('noLike.png')
           }
        
        console.log('Liked')
@@ -100,21 +95,21 @@ export default function Appartement() {
                                     </div>
                                     <div className="Action">
                                         <div className='Action__Elment'>
-                                            <img src={noLike} id={e.localisation} onClick={()=>handleLike(e.localisation)} />
+                                            <img src={getPublicImagePath('noLike.png')} id={e.localisation} onClick={()=>handleLike(e.localisation)} />
                                         </div>
                                         <div className='Action__Elment'>
-                                            <img src={arrow} alt="" onClick={()=> navigate('/detail-appartement/'+e.id)} />
+                                            <img src={getPublicImagePath('arrow.png')} alt="" onClick={()=> navigate('/detail-appartement/'+e.id)} />
                                         </div>
                                     </div>
                                 </div>
                                 <div className="Detail__Car">
                                      <div className="Detail__Element">
-                                        <img src={location} />  
+                                        <img src={getPublicImagePath('location.png')} />  
                                         <p>Marrakech /{e.localisation}</p>
                                      </div>
     
                                      <div className="Detail__Element">
-                                        <img src={user} />
+                                        <img src={getPublicImagePath('user.png')} />
                                         <p>{e.nbrOfperson}</p>
                                      </div>
     

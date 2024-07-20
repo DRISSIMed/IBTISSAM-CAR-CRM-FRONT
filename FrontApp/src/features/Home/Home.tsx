@@ -3,10 +3,10 @@ import './Home.css'
 // import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 import { Select,DatePicker } from 'antd';
 
-import pic from '../../Imgaes/profile.png'
-import audi from '../../Imgaes/audi.png'
-import house from '../../Imgaes/house.png'
-import tourIcon from '../../Imgaes/tour.png'
+import pic from '../Imgaes/profile.png'
+import audi from '../Imgaes/audi.png'
+import house from '../Imgaes/house.png'
+import tourIcon from '../Imgaes/tour.png'
 import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import PageLayout from '../common/PageLayout'

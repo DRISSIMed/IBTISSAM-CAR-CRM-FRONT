@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Avatar from 'react-avatar';
-import star from '../../Imgaes/starOutline.png'
+import star from '../Imgaes/starOutline.png'
 import { BsCursorFill } from "react-icons/bs";
 import './Rate.css'
 

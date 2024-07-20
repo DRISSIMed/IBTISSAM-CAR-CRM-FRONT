@@ -1,19 +1,9 @@
 import React  , { useState ,useEffect} from 'react'
-import house from '../../Imgaes/house.png'
-import location from '../../Imgaes/location.png'
-import user  from '../../Imgaes/profile.png'
-import calendar from '../../Imgaes/calendar.png'
-import ageIcon from '../../Imgaes/adultAge.png'
-import emailIcon from '../../Imgaes/mail.png'
-import phoneIcon from '../../Imgaes/telephone.png'
-import identityIcon from '../../Imgaes/card.png'
-import drivingIcon from '../../Imgaes/driving.png'
 import PageLayout from '../common/PageLayout'
 import { useFormik } from 'formik';
-import { UrlApi } from '../common/Util'
+import { UrlApi,getPublicImagePath } from '../common/Util'
 import { useParams } from "react-router-dom";
 import Rate from '../common/Rate'
-import countryIcon from '../../Imgaes/country.png'
 import Select from 'react-select';
 import {toast } from 'react-toastify';
 import './DetailAppartement.css'
@@ -69,7 +59,7 @@ export default function DetailsAppartement() {
             for(let i=0;i<formik.values.nbrOfChildrens;i++){
                 let subData=<div className="Input__View_Detail">
                 <div className="Input__Icon__Detail">
-                    <img src={ageIcon} alt="" />
+                    <img src={getPublicImagePath('adultAge.png')} alt="" />
                 </div>
                 <div className="Input__Pad">
                      <input
@@ -173,7 +163,7 @@ export default function DetailsAppartement() {
     
                                                     <div className="Info__Car">
                                                             <div className="Info__Car__Description">
-                                                                    <img src={location} /> 
+                                                                    <img src={getPublicImagePath('location.png')} /> 
                                                             </div>
                                                             <div className="Info__Car__Description">
                                                             <div className="Text__Description"><p>Marrakech</p></div>
@@ -184,7 +174,7 @@ export default function DetailsAppartement() {
                                                     
                                                     <div className="Info__Car">
                                                             <div className="Info__Car__Description">
-                                                                <img src={user} />
+                                                                <img src={getPublicImagePath('user.png')} />
                                                             </div>
                                                             <div className="Info__Car__Description">
                                                             <div className="Text__Description"> <p>{dataList.nbrOfperson}</p></div>
@@ -197,7 +187,7 @@ export default function DetailsAppartement() {
     
                                                     <div className="Info__Car">
                                                             <div className="Info__Car__Description">
-                                                                <img src={calendar} />
+                                                                <img src={getPublicImagePath('calendar.png')} />
                                                                 <div className="Button__Counter">
                                                                     <button>+</button>
                                                                     <button>-</button>
@@ -240,7 +230,7 @@ export default function DetailsAppartement() {
                              
                              <div className="Input__View_Detail">
                                    <div className="Input__Icon__Detail">
-                                       <img src={user} alt="" />
+                                       <img src={getPublicImagePath('user.png')} alt="" />
 
                                    </div>
                                    <div className="Input__Pad">
@@ -262,7 +252,7 @@ export default function DetailsAppartement() {
                         
                              <div className="Input__View_Detail">
                                    <div className="Input__Icon__Detail">
-                                       <img src={emailIcon} alt="" />
+                                       <img src={getPublicImagePath('mail.png')} alt="" />
 
                                    </div>
                                    <div className="Input__Pad">
@@ -285,7 +275,7 @@ export default function DetailsAppartement() {
 
                              <div className="Input__View_Detail">
                                    <div className="Input__Icon__Detail">
-                                       <img src={countryIcon} alt="" />
+                                       <img src={getPublicImagePath('country.png')} alt="" />
 
                                    </div>
                                    <div className="Input__Pad">
@@ -314,7 +304,7 @@ export default function DetailsAppartement() {
 
                              <div className="Input__View_Detail">
                                    <div className="Input__Icon__Detail">
-                                       <img src={phoneIcon} alt="" />
+                                       <img src={getPublicImagePath('telephone.png')} alt="" />
 
                                    </div>
                                    <div className="Input__Pad">
@@ -334,7 +324,7 @@ export default function DetailsAppartement() {
 
                              <div className="Input__View_Detail">
                                    <div className="Input__Icon__Detail">
-                                       <img src={ageIcon} alt="" />
+                                       <img src={getPublicImagePath('adultAge.png')} alt="" />
 
                                    </div>
                                    <div className="Input__Pad">
@@ -354,7 +344,7 @@ export default function DetailsAppartement() {
 
                              <div className="Input__View_Detail">
                                    <div className="Input__Icon__Detail">
-                                       <img src={user} alt="" />
+                                       <img src={getPublicImagePath('user.png')} alt="" />
 
                                    </div>
                                    <div className="Input__Pad">
@@ -376,7 +366,7 @@ export default function DetailsAppartement() {
 
                              <div className="Input__View_Detail">
                                    <div className="Input__Icon__Detail">
-                                       <img src={identityIcon} alt="" />
+                                       <img src={getPublicImagePath('card.png')} alt="" />
 
                                    </div>
                                    <div className="Input__Pad">
@@ -401,7 +391,7 @@ export default function DetailsAppartement() {
 
                              <div className="Input__View_Detail">
                                    <div className="Input__Icon__Detail">
-                                       <img src={drivingIcon} alt="" />
+                                       <img src={getPublicImagePath('driving.png')} alt="" />
 
                                    </div>
                                    <div className="Input__Pad">
@@ -452,7 +442,7 @@ export default function DetailsAppartement() {
                               {isHaveChildren?<>
                                  <div className="Input__View_Detail">
                                  <div className="Input__Icon__Detail">
-                                     <img src={user} alt="" />
+                                     <img src={getPublicImagePath('user.png')} alt="" />
 
                                  </div>
                                  <div className="Input__Pad">

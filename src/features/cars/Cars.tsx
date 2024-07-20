@@ -1,14 +1,6 @@
 import React, { useEffect, useState, CSSProperties } from 'react'
-import { UrlApi } from '../common/Util'
+import { UrlApi,getPublicImagePath } from '../common/Util'
 import './Cars.css'
-import noLike from '../../Imgaes/noLike.png'
-import user from '../../Imgaes/user.png'
-import fuel from '../../Imgaes/fuel.png'
-import location from '../../Imgaes/location.png'
-import speed from '../../Imgaes/speed.png'
-import like from '../../Imgaes/like.png'
-import arrow from '../../Imgaes/arrow.png'
-import mercedesIcon from '../../Imgaes/mercedes.png'
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import RiseLoader from "react-spinners/RiseLoader";
@@ -84,11 +76,11 @@ export default function Cars() {
 
     const element = document.getElementById(id) as HTMLInputElement
     console.log("ELEMENT", element)
-    if (element.src === 'http://localhost:3000' + noLike) {
+    if (element.src === 'http://localhost:3000' + getPublicImagePath('noLike.png')) {
       toast.success("Thank you !", { className: 'toast-message' });
-      element.src = like
+      element.src = getPublicImagePath('like.png')
     } else {
-      element.src = noLike
+      element.src = getPublicImagePath('noLike.png')
     }
 
     console.log('Liked')
@@ -121,7 +113,7 @@ export default function Cars() {
               }): any {
                 return (
                   <div className="Tag__Element" key={e.id} id={e.id} onClick={() => handleChoice(e.id, e.code)}>
-                    <p className='Logo__Icon'><img src={mercedesIcon} /></p>
+                    <p className='Logo__Icon'><img src={getPublicImagePath('mercedes.png')} /></p>
                     <p>{e.libelle}</p>
                   </div>
                 )
@@ -171,31 +163,31 @@ export default function Cars() {
                       </div>
                       <div className="Action">
                         <div className='Action__Elment'>
-                          <img src={noLike} id={e.libelle} onClick={() => handleLike(e.libelle)} />
+                          <img src={getPublicImagePath('noLike.png')} id={e.libelle} onClick={() => handleLike(e.libelle)} />
                         </div>
                         <div className='Action__Elment'>
-                          <img src={arrow} alt="" onClick={() => navigate('/details-car/' + e.id)} />
+                          <img src={getPublicImagePath('arrow.png')} alt="" onClick={() => navigate('/details-car/' + e.id)} />
                         </div>
                       </div>
                     </div>
                     <div className="Detail__Car">
                       <div className="Detail__Element">
-                        <img src={location} />
+                        <img src={getPublicImagePath('location.png')} />
                         <p>Marrakech</p>
                       </div>
 
                       <div className="Detail__Element">
-                        <img src={speed} />
+                        <img src={getPublicImagePath('speed.png')} />
                         <p>239 km</p>
                       </div>
 
                       <div className="Detail__Element">
-                        <img src={fuel} />
+                        <img src={getPublicImagePath('fuel.png')} />
                         <p>Hybrid</p>
                       </div>
 
                       <div className="Detail__Element">
-                        <img src={user} />
+                        <img src={getPublicImagePath('user.png')} />
                         <p>4</p>
                       </div>
 

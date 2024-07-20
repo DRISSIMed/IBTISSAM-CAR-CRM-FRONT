@@ -1,9 +1,6 @@
 import { useTranslation } from "react-i18next";
-import audi from '../../Imgaes/audi.png'
-import house from '../../Imgaes/house.png'
-import tourIcon from '../../Imgaes/tour.png'
 import { Link } from "react-router-dom";
-
+import { getPublicImagePath } from '../common/Util'
 export default function  CompanyServices(){
 
     const { t, i18n } = useTranslation();
@@ -15,7 +12,7 @@ export default function  CompanyServices(){
 
                             <div className="Service__Element">
                                     <div className="Service__Element__Image">
-                                        <img src={house} />
+                                        <img src={getPublicImagePath('house.png')} />
                                         </div>
                                         <div className="Service__Element__Container">
                                         <h3>{t("RentApartment")}</h3>
@@ -29,7 +26,7 @@ export default function  CompanyServices(){
 
                             <div className="Service__Element">
                                 <div className="Service__Element__Image">
-                                    <img src={audi} />
+                                    <img src={getPublicImagePath('audi.png')} />
                                     </div>
 
                                     <div className="Service__Element__Container">
@@ -45,7 +42,7 @@ export default function  CompanyServices(){
 
                             <div className="Service__Element">
                                 <div className="Service__Element__Image">
-                                    <img src={tourIcon} />
+                                    <img src={getPublicImagePath('tour.png')} />
                                     </div>
 
                                     <div className="Service__Element__Container">

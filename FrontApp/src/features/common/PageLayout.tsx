@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import pic from '../../Imgaes/profile.png'
+import pic from '../Imgaes/profile.png'
 import {FiUser} from "react-icons/fi";
 import {FiHome} from "react-icons/fi";
 import {FiList} from "react-icons/fi";

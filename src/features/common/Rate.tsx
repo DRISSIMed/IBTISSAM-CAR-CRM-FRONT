@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { UrlApi } from './Util';
 import Avatar from 'react-avatar'
-import remove from '../../Imgaes/delete.png'
-import star from '../../Imgaes/starOutline.png'
-import fullStar from '../../Imgaes/starFullLine.png'
-import noComment from '../../Imgaes/noComment.png'
-import { BsCursorFill } from "react-icons/bs";
 import { BiCommentAdd } from "react-icons/bi";
 import { toast } from 'react-toastify';
 import './Rate.css'
@@ -13,7 +8,7 @@ import Appartement from '../Appartement/Appartement';
 import { Card } from 'primereact/card';
 import { Rating, RatingChangeEvent } from "primereact/rating";
 import { useTranslation } from "react-i18next";
-
+import { getPublicImagePath } from '../common/Util';
 export default function Rate(subject: any) {
 
   const [rating, setRating] = useState<number | null>(null);
@@ -93,19 +88,19 @@ export default function Rate(subject: any) {
     console.log("ID ==>>", id)
 
     const element = document.getElementById(id) as HTMLInputElement
-    if (element.src === 'http://localhost:3000' + star) {
-      element.src = fullStar
+    if (element.src === 'http://localhost:3000' + getPublicImagePath('starOutline.png')) {
+      element.src = getPublicImagePath('starFullLine.png')
 
     }
     else {
-      element.src = star
+      element.src = getPublicImagePath('starOutline.png')
     }
 
   }
 
   const header = (
     <div className="card flex justify-content-center">
-      <Rating value={rating ?? 0} onChange={(e: RatingChangeEvent) => setRating(e.value ?? 0)} cancel={false} onIcon={<img src={fullStar} alt="" style={{ width: '20px', height: '20px' }}/>}/>
+      <Rating value={rating ?? 0} onChange={(e: RatingChangeEvent) => setRating(e.value ?? 0)} cancel={false} onIcon={<img src={getPublicImagePath('starFullLine.png')} alt="" style={{ width: '20px', height: '20px' }}/>}/>
     </div>
   )
   return (
@@ -134,7 +129,7 @@ export default function Rate(subject: any) {
               <Avatar value='MD' round={true} size='30px' style={{ marginLeft: '10px' }} />
               <div className="Input__Comment">
                 <div className="Starts__Container">
-                <Rating value={e.starsNbr} readOnly cancel={false} onIcon={<img src={fullStar}   alt="" />} />
+                <Rating value={e.starsNbr} readOnly cancel={false} onIcon={<img src={getPublicImagePath('starFullLine.png')}   alt="" />} />
                 </div>
                 <div className="Comment_Container">
                   <div className="Comment__Text">
@@ -142,7 +137,7 @@ export default function Rate(subject: any) {
                     <p>{e.comment}</p>
                   </div>
                   <div className="Remove__Container">
-                    <img src={remove}  onClick={() => handleRemoveComment(e.id)} />
+                    <img src={getPublicImagePath('delete.png')}  onClick={() => handleRemoveComment(e.id)} />
                   </div>
 
 
@@ -162,7 +157,7 @@ export default function Rate(subject: any) {
 
 
         : <div className="No__Comment">
-          <img src={noComment} />
+          <img src={getPublicImagePath('noComment.png')} />
           <h3> {t("tNoComment")}  </h3>
         </div>}
 

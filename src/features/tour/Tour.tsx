@@ -1,27 +1,20 @@
 import React from 'react'
-import like from '../../Imgaes/like.png'
-import noLike from '../../Imgaes/noLike.png'
-import arrow  from '../../Imgaes/arrow.png'
-import carIcon from '../../Imgaes/car.png'
-import user from '../../Imgaes/user.png'
-import zagora from '../../Imgaes/zagora-desert.png'
-import agafay from  '../../Imgaes/agafay-desert.png'
-import ourika from '../../Imgaes/ourika.png'
-import todgha from '../../Imgaes/todgha.png'
+
 import { useNavigate } from "react-router-dom";
 import PageLayout from '../common/PageLayout'
 import {toast } from 'react-toastify';
+import { UrlApi,getPublicImagePath } from '../common/Util'
 import './Tour.css'
 
 export default function Tour() {
     const navigate = useNavigate();
    const handleLike =(id:string)=>{
      const element= document.getElementById(id) as HTMLInputElement
-      if(element.src==='http://localhost:3000'+noLike ){
+      if(element.src==='http://localhost:3000'+getPublicImagePath('noLike.png') ){
         toast.success("Thank you !",{className: 'toast-message'});
-        element.src=like
+        element.src=getPublicImagePath('like.png')
        }else{
-        element.src=noLike
+        element.src=getPublicImagePath('noLike.png')
        }
     
     console.log('Liked')
@@ -75,7 +68,7 @@ export default function Tour() {
 
                             <div className="Body__Element">
                                 <div className="Image">
-                                    <img src={zagora} alt="" />
+                                    <img src={getPublicImagePath('zagora-desert.png')} alt="" />
                                 </div>
                                 <div className="Description">
                                     <div className="Info__Car__Index">
@@ -84,22 +77,22 @@ export default function Tour() {
                                     </div>
                                     <div className="Action">
                                         <div className='Action__Elment' >
-                                            <img src={noLike} alt="" id='zagora' onClick={()=>handleLike('zagora')} />
+                                            <img src={getPublicImagePath('noLike.png')} alt="" id='zagora' onClick={()=>handleLike('zagora')} />
                                         </div>
                                         <div className='Action__Elment'>
-                                            <img src={arrow} alt="" onClick={()=> navigate('/detail-appartement')} />
+                                            <img src={getPublicImagePath('arrow.png')} alt="" onClick={()=> navigate('/detail-appartement')} />
                                         </div>
                                     </div>
                                 </div>
 
                                 <div className="Detail__House">
                                  <div className="Detail__Element__House">
-                                    <img src={carIcon} />  
+                                    <img src={getPublicImagePath('car.png')} />  
                                     <p>Toyota TX</p>
                                  </div>
 
                                  <div className="Detail__Element__House">
-                                    <img src={user} />
+                                    <img src={getPublicImagePath('user.png')} />
                                     <p>4</p>
                                  </div>
 
@@ -109,7 +102,7 @@ export default function Tour() {
 
                             <div className="Body__Element">
                                 <div className="Image">
-                                    <img src={agafay} alt="" />
+                                    <img src={getPublicImagePath('agafay-desert.png')} alt="" />
                                 </div>
                                 <div className="Description">
                                     <div className="Info__Car__Index">
@@ -118,22 +111,22 @@ export default function Tour() {
                                     </div>
                                     <div className="Action">
                                         <div className='Action__Elment'>
-                                            <img src={like} alt="" />
+                                            <img src={getPublicImagePath('like.png')} alt="" />
                                         </div>
                                         <div className='Action__Elment'>
-                                            <img src={arrow} alt="" onClick={()=> navigate('/detail-appartement')} />
+                                            <img src={getPublicImagePath('arrow.png')} alt="" onClick={()=> navigate('/detail-appartement')} />
                                         </div>
                                     </div>
                                 </div>
 
                                 <div className="Detail__House">
                                  <div className="Detail__Element__House">
-                                    <img src={carIcon} />  
+                                    <img src={getPublicImagePath('car.png')} />  
                                     <p>Toyota TX</p>
                                  </div>
 
                                  <div className="Detail__Element__House">
-                                    <img src={user} />
+                                    <img src={getPublicImagePath('user.png')} />
                                     <p>4</p>
                                  </div>
 
@@ -143,7 +136,7 @@ export default function Tour() {
 
                             <div className="Body__Element">
                                 <div className="Image">
-                                    <img src={ourika} alt="" />
+                                    <img src={getPublicImagePath('ourika.png')} alt="" />
                                 </div>
                                 <div className="Description">
                                     <div className="Info__Car__Index">
@@ -152,22 +145,22 @@ export default function Tour() {
                                     </div>
                                     <div className="Action">
                                         <div className='Action__Elment'>
-                                            <img src={like} alt="" />
+                                            <img src={getPublicImagePath('like.png')} alt="" />
                                         </div>
                                         <div className='Action__Elment'>
-                                            <img src={arrow} alt="" onClick={()=> navigate('/detail-appartement')} />
+                                            <img src={getPublicImagePath('arrow.png')} alt="" onClick={()=> navigate('/detail-appartement')} />
                                         </div>
                                     </div>
                                 </div>
 
                                 <div className="Detail__House">
                                  <div className="Detail__Element__House">
-                                    <img src={carIcon} />  
+                                    <img src={getPublicImagePath('car.png')} />  
                                     <p>Toyota TX</p>
                                  </div>
 
                                  <div className="Detail__Element__House">
-                                    <img src={user} />
+                                    <img src={getPublicImagePath('user.png')} />
                                     <p>4</p>
                                  </div>
 
@@ -177,7 +170,7 @@ export default function Tour() {
 
                             <div className="Body__Element">
                                 <div className="Image">
-                                    <img src={todgha} alt="" />
+                                    <img src={getPublicImagePath('ourika.png')} alt="" />
                                 </div>
                                 <div className="Description">
                                     <div className="Info__Car__Index">
@@ -186,22 +179,22 @@ export default function Tour() {
                                     </div>
                                     <div className="Action">
                                         <div className='Action__Elment'>
-                                            <img src={like} alt="" />
+                                            <img src={getPublicImagePath('like.png')} alt="" />
                                         </div>
                                         <div className='Action__Elment'>
-                                            <img src={arrow} alt="" onClick={()=> navigate('/detail-appartement')} />
+                                            <img src={getPublicImagePath('arrow.png')} alt="" onClick={()=> navigate('/detail-appartement')} />
                                         </div>
                                     </div>
                                 </div>
 
                                 <div className="Detail__House">
                                  <div className="Detail__Element__House">
-                                    <img src={carIcon} />  
+                                    <img src={getPublicImagePath('car.png')} />  
                                     <p>Toyota TX</p>
                                  </div>
 
                                  <div className="Detail__Element__House">
-                                    <img src={user} />
+                                    <img src={getPublicImagePath('user.png')} />
                                     <p>4</p>
                                  </div>
 

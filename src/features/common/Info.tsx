@@ -1,11 +1,8 @@
 import React from 'react';
-import icon24 from '../../Imgaes/Icon-24h-01.png';
-import iconCall from '../../Imgaes/Icon-Call-Center-01.png';
-import iconDirect from '../../Imgaes/Icon-Agence-01.png';
 import CardInfo from './CardInfo';
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-
+import { getPublicImagePath } from '../common/Util'
 function Info() {
     const { t, i18n } = useTranslation();
     return (
@@ -20,22 +17,22 @@ function Info() {
             </div>
             <Slides>
                 <CardInfo
-                    Icon={icon24}
+                    Icon={getPublicImagePath('Icon-24h-01.png')}
                     disc={t('tonline')}
                     disc2={t('tinourSite')}
                 />
                 <CardInfo
-                    Icon={iconCall}
+                    Icon={getPublicImagePath('Icon-Call-Center-01.png')}
                     disc={t('tonphone')}
                     disc2={t('tcallcenter')}
                 />
                   <CardInfo
-                    Icon={iconDirect}
+                    Icon={getPublicImagePath('Icon-Agence-01.png')}
                     disc={t('treseauxsociaux')}
                     disc2={`WhatsApp,Instagram...`}
                 />
                 <CardInfo
-                    Icon={iconDirect}
+                    Icon={getPublicImagePath('Icon-Agence-01.png')}
                     disc={t('tdirectementDans')}
                     disc2={t('tagence')}
                 />

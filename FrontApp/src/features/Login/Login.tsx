@@ -3,7 +3,7 @@ import './Login.css'
 import { AiOutlineUser} from "react-icons/ai";
 import { AiOutlineUnlock} from "react-icons/ai";
 import { AiFillFacebook} from "react-icons/ai";
-import pic from '../../Imgaes/google.png'
+import pic from '../Imgaes/google.png'
 import { Link } from 'react-router-dom';
 
 
