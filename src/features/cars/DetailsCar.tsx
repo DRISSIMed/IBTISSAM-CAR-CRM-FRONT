@@ -156,7 +156,7 @@ const loadItem=()=>{
     for (let i = 0; i < formik.values.nbrOfChildrens; i++) {
         let subData = <div className="Input__View_Detail">
             <div className="Input__Icon__Detail">
-                <img src={getPublicImagePath('ageIcon.png')} alt="" />
+                <img src={getPublicImagePath('man.png')} alt="" />
             </div>
             <div className="Input__Pad">
                 <input
@@ -530,7 +530,7 @@ const loadItem=()=>{
 
                         <div className="Input__View_Detail">
                             <div className="Input__Icon__Detail">
-                                <img src={getPublicImagePath('ageIcon.png')} alt="" />
+                                <img src={getPublicImagePath('adultAge.png')} alt="" />
 
                             </div>
                             <div className="Input__Pad">
